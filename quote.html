@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get a Quote — Aligna LLC</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -58,9 +59,9 @@ nav{
 /* SERVICE PICKER */
 .service-picker{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr 1fr 1fr;
   gap:20px;
-  max-width:700px;
+  max-width:980px;
   margin:40px auto 60px;
   padding:0 60px;
 }
@@ -440,6 +441,11 @@ nav{
 <div class="page-hero">
   <h1>Get your <em>free</em> quote</h1>
   <p>Tell us what you need. We'll match you with the right team and send a detailed proposal within 24 hours.</p>
+  <div style="margin-top:16px;">
+    <a href="https://calendly.com/alignahq" target="_blank" style="font-size:13px;font-weight:600;color:#4a90d9;text-decoration:none;border-bottom:1px solid #4a90d9;padding-bottom:2px;">
+      Prefer to talk first? Book a WhatsApp call →
+    </a>
+  </div>
 </div>
 
 <!-- SERVICE PICKER -->
@@ -454,6 +460,12 @@ nav{
     <span class="service-icon">🏠</span>
     <h3>Home Organizing</h3>
     <p>Professional organizing for any space — kitchen, closets, garage, full home. We handle the chaos.</p>
+    <span class="service-arrow">→</span>
+  </div>
+  <div class="service-card" onclick="if(typeof Calendly!=='undefined'){Calendly.initPopupWidget({url:'https://calendly.com/alignahq'});return false;}else{window.open('https://calendly.com/alignahq','_blank');}">
+    <span class="service-icon">📞</span>
+    <h3>Talk to Us First</h3>
+    <p>Not sure what you need? Book a free 15-min WhatsApp call and we'll figure it out together.</p>
     <span class="service-arrow">→</span>
   </div>
 </div>
