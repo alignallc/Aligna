@@ -3,931 +3,1132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aligna — Premium Event Staffing</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+<title>Proposal — Una Pizza · CLK Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f7f9fc;
-    --white: #ffffff;
-    --blue-light: #e8f1fb;
-    --blue-mid: #c2d9f5;
-    --blue: #4a90d9;
-    --blue-deep: #2563a8;
-    --navy: #1a2d4a;
-    --text: #1a2d4a;
-    --text-mid: #4a6080;
-    --text-light: #8fa5bf;
-    --border: #e4edf8;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-weight: 400;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 0 60px;
-    height: 68px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(247,249,252,0.9);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.3px;
-  }
-
-  .logo span { color: var(--blue); }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--text-mid);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--navy); }
-
-  .nav-btn {
-    background: var(--navy) !important;
-    color: white !important;
-    padding: 9px 22px;
-    border-radius: 8px;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    transition: background 0.2s !important;
-  }
-
-  .nav-btn:hover { background: var(--blue-deep) !important; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 100px 60px 60px;
-    background: var(--white);
-    overflow: hidden;
-  }
-
-  .hero-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-  }
-
-  .hero-left { max-width: 560px; }
-
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 24px;
-    opacity: 0;
-    animation: up 0.7s ease 0.1s forwards;
-  }
-
-  .hero-tag::before {
-    content: '';
-    width: 24px; height: 1.5px;
-    background: var(--blue);
-  }
-
-  .hero h1 {
-    font-size: clamp(36px, 4.5vw, 58px);
-    font-weight: 700;
-    line-height: 1.08;
-    letter-spacing: -2px;
-    color: var(--navy);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: up 0.7s ease 0.2s forwards;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--blue);
-  }
-
-  .hero-left > p {
-    font-size: 16px;
-    color: var(--text-mid);
-    line-height: 1.75;
-    margin-bottom: 36px;
-    font-weight: 400;
-    opacity: 0;
-    animation: up 0.7s ease 0.3s forwards;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: up 0.7s ease 0.4s forwards;
-  }
-
-  .hero-trust {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: up 0.7s ease 0.5s forwards;
-  }
-
-  .hero-trust span {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-mid);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .btn {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-    display: inline-block;
-  }
-
-  .btn-dark {
-    background: var(--navy);
-    color: white;
-    padding: 14px 32px;
-    box-shadow: 0 4px 20px rgba(26,45,74,0.2);
-  }
-
-  .btn-dark:hover {
-    background: var(--blue-deep);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 28px rgba(26,45,74,0.25);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-mid);
-    padding: 14px 24px;
-    border: 1.5px solid var(--border);
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--blue-mid);
-    color: var(--navy);
-  }
-
-  /* HERO RIGHT — IMAGE */
-  .hero-right {
-    position: relative;
-    opacity: 0;
-    animation: up 0.9s ease 0.4s forwards;
-  }
-
-  .hero-img-wrap {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 520px;
-    box-shadow: 0 24px 64px rgba(26,45,74,0.15);
-  }
-
-  .hero-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  .hero-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(26,45,74,0.4) 0%, transparent 50%);
-  }
-
-  .hero-stat-1 {
-    position: absolute;
-    top: 28px;
-    right: -20px;
-    background: white;
-    border-radius: 14px;
-    padding: 18px 22px;
-    box-shadow: 0 8px 32px rgba(26,45,74,0.12);
-    border: 1px solid var(--border);
-    min-width: 150px;
-  }
-
-  .hero-stat-1 .s-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-
-  .hero-stat-1 .s-value {
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -1px;
-    line-height: 1;
-  }
-
-  .hero-stat-1 .s-value span { color: var(--blue); }
-
-  .hero-stat-1 .s-sub {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-top: 3px;
-  }
-
-  .hero-stat-2 {
-    position: absolute;
-    bottom: 28px;
-    left: -20px;
-    background: var(--blue);
-    border-radius: 14px;
-    padding: 18px 22px;
-    color: white;
-    min-width: 140px;
-    box-shadow: 0 8px 32px rgba(74,144,217,0.3);
-  }
-
-  .hero-stat-2 .s-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 4px;
-  }
-
-  .hero-stat-2 .s-value {
-    font-size: 30px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1;
-  }
-
-  .hero-stat-2 .s-sub {
-    font-size: 11px;
-    opacity: 0.7;
-    margin-top: 3px;
-  }
-
-  /* keep old .hero-bg and .hero-dots harmless */
-  .hero-bg, .hero-dots { display: none; }
-  .hero-content, .hero-visual { display: none; }
-
-  /* STRIP */
-  .strip {
-    background: var(--navy);
-    padding: 20px 60px;
-    display: flex;
-    align-items: center;
-    gap: 60px;
-    overflow: hidden;
-  }
-
-  .strip-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    white-space: nowrap;
-  }
-
-  .strip-divider {
-    width: 1px; height: 16px;
-    background: rgba(255,255,255,0.1);
-    flex-shrink: 0;
-  }
-
-  .strip-items {
-    display: flex;
-    gap: 48px;
-    align-items: center;
-  }
-
-  .strip-item {
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-
-  /* SERVICES */
-  .services {
-    padding: 100px 60px;
-    max-width: 1160px;
-    margin: 0 auto;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 14px;
-  }
-
-  .h2 {
-    font-size: clamp(28px, 3.5vw, 42px);
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    color: var(--navy);
-    line-height: 1.15;
-    margin-bottom: 14px;
-  }
-
-  .sub {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 1.7;
-    max-width: 440px;
-    margin-bottom: 56px;
-  }
-
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 32px 28px;
-    transition: all 0.25s;
-  }
-
-  .card:hover {
-    border-color: var(--blue-mid);
-    box-shadow: 0 12px 40px rgba(74,144,217,0.08);
-    transform: translateY(-3px);
-  }
-
-  .card-icon {
-    width: 44px; height: 44px;
-    background: var(--blue-light);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .card-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 10px;
-    letter-spacing: -0.3px;
-  }
-
-  .card-text {
-    font-size: 13.5px;
-    color: var(--text-mid);
-    line-height: 1.7;
-  }
-
-  /* WHY */
-  .why {
-    background: var(--white);
-    padding: 100px 60px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .why-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 100px;
-    align-items: center;
-  }
-
-  .metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .metric {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 24px;
-    transition: all 0.25s;
-  }
-
-  .metric:first-child {
-    grid-column: span 2;
-    background: var(--blue-light);
-    border-color: var(--blue-mid);
-  }
-
-  .metric:hover {
-    border-color: var(--blue-mid);
-    box-shadow: 0 8px 32px rgba(74,144,217,0.08);
-  }
-
-  .metric-n {
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    color: var(--navy);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-n span { color: var(--blue); }
-
-  .metric-l {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-
-  .points {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 40px;
-  }
-
-  .point {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .point-dot {
-    width: 32px; height: 32px;
-    background: var(--blue-light);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .point h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 3px;
-  }
-
-  .point p {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
-
-  /* PROCESS */
-  .process {
-    padding: 100px 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-top: 56px;
-  }
-
-  .step {
-    position: relative;
-    padding-top: 4px;
-  }
-
-  .step-n {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: var(--blue);
-    margin-bottom: 16px;
-  }
-
-  .step-line {
-    width: 100%;
-    height: 2px;
-    background: var(--blue-light);
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .step-line::before {
-    content: '';
-    position: absolute;
-    left: 0; top: -3px;
-    width: 8px; height: 8px;
-    background: var(--blue);
-    border-radius: 50%;
-  }
-
-  .step h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-  }
-
-  .step p {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.65;
-  }
-
-  /* CTA */
-  .cta {
-    margin: 0 60px 80px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue-deep) 100%);
-    border-radius: 20px;
-    padding: 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta::before {
-    content: '';
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(74,144,217,0.2) 0%, transparent 70%);
-  }
-
-  .cta::after {
-    content: '';
-    position: absolute;
-    bottom: -60px; left: -60px;
-    width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(74,144,217,0.15) 0%, transparent 70%);
-  }
-
-  .cta-inner { position: relative; z-index: 1; }
-
-  .cta h2 {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 700;
-    color: white;
-    letter-spacing: -1.5px;
-    line-height: 1.15;
-    margin-bottom: 16px;
-  }
-
-  .cta p {
-    font-size: 15px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 40px;
-    line-height: 1.7;
-    max-width: 440px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .btn-white {
-    background: white;
-    color: var(--navy);
-    padding: 15px 40px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  }
-
-  .btn-white:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 40px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer-logo {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .footer-logo span { color: var(--blue); }
-
-  footer p {
-    font-size: 13px;
-    color: var(--text-light);
-  }
-
-  footer a {
-    font-size: 13px;
-    color: var(--blue);
-    text-decoration: none;
-  }
-
-  /* ANIMATIONS */
-  @keyframes up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 90px 24px 60px; }
-    .hero-container { grid-template-columns: 1fr; gap: 40px; }
-    .hero-right { display: none; }
-    .hero-trust { gap: 12px; }
-    .strip { padding: 20px 24px; gap: 24px; }
-    .strip-items { display: none; }
-    .services, .process { padding: 60px 24px; }
-    .grid-3 { grid-template-columns: 1fr; }
-    .why { padding: 60px 24px; }
-    .why-inner { grid-template-columns: 1fr; gap: 40px; }
-    .metrics { display: none; }
-    .steps { grid-template-columns: 1fr 1fr; }
-    .cta { margin: 0 24px 60px; padding: 48px 32px; }
-    footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #ffffff;
+  --off: #f8f8f6;
+  --ink: #0f0f0e;
+  --ink-mid: #2d2d2b;
+  --ink-light: #6b6b65;
+  --border: #e5e5e0;
+  --red: #cc2b0a;
+  --red-soft: #fff1ee;
+  --navy: #1a2d4a;
+  --blue: #4a90d9;
+  --sans: 'Plus Jakarta Sans', sans-serif;
+  --serif: 'Instrument Serif', serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* LAYOUT */
+.wrap { max-width: 840px; margin: 0 auto; padding: 0 40px; }
+
+/* ── COVER ─────────────────────────── */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #fff 60%, #fff8f6 100%);
+  z-index: 0;
+}
+
+.cover-watermark {
+  position: absolute;
+  font-family: var(--serif);
+  font-size: clamp(120px, 20vw, 220px);
+  font-style: italic;
+  color: rgba(204,43,10,0.04);
+  letter-spacing: -0.04em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover-top, .cover-mid, .cover-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.clk-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.clk-dot {
+  width: 36px; height: 36px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: white;
+}
+
+.clk-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.clk-sub {
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 400;
+}
+
+.cover-tag-wrap { text-align: right; }
+
+.cover-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(204,43,10,0.3);
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+/* COVER MIDDLE */
+.cover-mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 0;
+}
+
+.cover-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cover-eyebrow::before {
+  content: '';
+  width: 32px; height: 1.5px;
+  background: var(--red);
+}
+
+.cover-h1 {
+  font-family: var(--serif);
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.cover-h1 em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.cover-tagline {
+  font-size: 15px;
+  color: var(--ink-light);
+  font-weight: 400;
+  margin-top: 24px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.cover-pills {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-mid);
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+.pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* COVER BOTTOM */
+.cover-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 32px;
+}
+
+.cb-meta { font-size: 12px; color: var(--ink-light); line-height: 1.5; }
+.cb-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.cb-meta.right { text-align: right; }
+.cb-line { width: 1px; height: 40px; background: var(--border); justify-self: center; }
+
+/* ── SECTIONS ─────────────────────── */
+.section {
+  padding: 88px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 48px;
+}
+
+.sec-num {
+  font-size: 10px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.sec-line {
+  width: 48px; height: 1px;
+  background: var(--border);
+}
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.sec-title em { font-style: italic; color: var(--red); }
+
+.sec-body {
+  font-size: 15px;
+  color: var(--ink-light);
+  line-height: 1.85;
+  max-width: 560px;
+  font-weight: 400;
+}
+
+/* ── INTRO QUOTE ─────────────────── */
+.intro-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.8vw, 28px);
+  color: var(--ink-mid);
+  line-height: 1.45;
+  margin: 48px 0;
+  padding: 28px 32px;
+  background: var(--off);
+  border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── DIAGNOSIS GRID ─────────────── */
+.diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.diag-card {
+  background: var(--white);
+  padding: 28px 24px;
+  transition: background 0.2s;
+}
+
+.diag-card:hover { background: var(--red-soft); }
+
+.diag-icon {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.diag-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.diag-body {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+.diag-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* ── DELIVERABLES ───────────────── */
+.del-list { margin-top: 48px; }
+
+.deliverable {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.deliverable:last-child { border-bottom: none; }
+.deliverable:hover .del-num { color: var(--red); }
+
+.del-num {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-style: italic;
+  color: var(--border);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.del-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.del-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--red-soft);
+  color: var(--red);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.del-desc {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.del-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.del-items li {
+  font-size: 13px;
+  color: var(--ink-light);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.del-items li::before {
+  content: '→';
+  color: var(--red);
+  flex-shrink: 0;
+  font-size: 11px;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+/* ADD-ON */
+.addon-box {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.addon-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.addon-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+
+.addon-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 28px;
+  color: white;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.addon-price span {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+/* ── TIMELINE ───────────────────── */
+.timeline {
+  margin-top: 48px;
+  position: relative;
+  padding-left: 52px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.tl-dot {
+  position: absolute;
+  left: -52px;
+  top: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+
+.tl-dot.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+.tl-week {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.tl-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.tl-items {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.8;
+}
+
+/* ── PRICING ────────────────────── */
+.pricing-table {
+  margin-top: 48px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.pr-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  transition: background 0.2s;
+  gap: 16px;
+}
+
+.pr-row:hover { background: var(--off); }
+.pr-row:last-child { border-bottom: none; }
+
+.pr-row.total {
+  background: var(--ink);
+}
+.pr-row.total:hover { background: var(--ink-mid); }
+
+.pr-name {
+  font-size: 14px;
+  color: var(--ink-light);
+}
+
+.pr-name strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.pr-row.total .pr-name { color: rgba(255,255,255,0.55); }
+.pr-row.total .pr-name strong { color: white; font-size: 16px; }
+
+.pr-time {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+.pr-row.total .pr-time { color: rgba(255,255,255,0.35); }
+
+.pr-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pr-row.total .pr-price {
+  color: var(--red);
+  font-size: 32px;
+}
+
+/* PAYMENT METHODS */
+.payment-box {
+  margin-top: 24px;
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.payment-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pay-method {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pay-icon { font-size: 16px; }
+
+.pricing-note {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-top: 16px;
+  line-height: 1.7;
+}
+
+/* NOT INCLUDED */
+.not-included {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 28px;
+}
+
+.ni-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+}
+
+.ni-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ni-list li {
+  font-size: 13px;
+  color: var(--ink-light);
+  display: flex;
+  gap: 12px;
+}
+
+.ni-list li::before {
+  content: '—';
+  color: var(--border);
+  flex-shrink: 0;
+}
+
+/* ── CLOSING ────────────────────── */
+.closing {
+  padding: 96px 0 80px;
+  text-align: center;
+}
+
+.closing-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.closing-title em { font-style: italic; color: var(--red); }
+
+.closing-sub {
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-bottom: 40px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 15px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(204,43,10,0.25);
+}
+
+.cta-btn:hover {
+  background: #b02508;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(204,43,10,0.3);
+}
+
+.closing-alt {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+.closing-alt a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy, .footer-right {
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+}
+
+/* PRINT */
+@media print {
+  .section { page-break-inside: avoid; }
+  @page { size: A4; margin: 20mm; }
+}
+
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .diag-grid { grid-template-columns: 1fr; }
+  .cover-h1 { font-size: 52px; }
+  .cover-bottom { grid-template-columns: 1fr; }
+  .cb-line { display: none; }
+  .deliverable { grid-template-columns: 40px 1fr; gap: 16px; }
+  .addon-box { grid-template-columns: 1fr; }
+  .addon-price { text-align: left; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+  .payment-methods { flex-direction: column; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">Align<span>a</span></div>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#process">How It Works</a></li>
-    <li><a href="quote.html" class="nav-btn">Get a Quote</a></li>
-  </ul>
-</nav>
+<!-- ═══════ COVER ═══════ -->
+<div class="wrap">
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-watermark">Una Pizza</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-container">
-
-    <!-- LEFT -->
-    <div class="hero-left">
-      <div class="hero-tag">Bay Area Event Staffing</div>
-      <h1>Professional staff<br>for <em>every</em> occasion</h1>
-      <p>Aligna connects Bay Area businesses with pre-vetted servers, bartenders, and coordinators — ready to represent your brand with precision.</p>
-      <div class="hero-actions">
-        <a href="quote.html" class="btn btn-dark">Get a Quote →</a>
-        <a href="#services" class="btn btn-ghost">Our Services</a>
-      </div>
-      <div class="hero-trust">
-        <span>✔ Vetted &amp; Insured</span>
-        <span>⚡ 48h Guarantee</span>
-        <span>★ 500+ Events</span>
+  <div class="cover-top">
+    <div class="clk-mark">
+      <div class="clk-dot">C</div>
+      <div>
+        <div class="clk-name">Cristina Lee Kim</div>
+        <div class="clk-sub">CLK Advisory</div>
       </div>
     </div>
-
-    <!-- RIGHT -->
-    <div class="hero-right">
-      <div class="hero-img-wrap">
-        <img src="https://images.pexels.com/photos/16125867/pexels-photo-16125867.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max" alt="Professional event staff serving guests">
-        <div class="hero-img-overlay"></div>
-      </div>
-      <div class="hero-stat-1">
-        <div class="s-label">Events Staffed</div>
-        <div class="s-value">500<span>+</span></div>
-        <div class="s-sub">Across the Bay Area</div>
-      </div>
-      <div class="hero-stat-2">
-        <div class="s-label">Satisfaction Rate</div>
-        <div class="s-value">98%</div>
-        <div class="s-sub">Client happiness</div>
-      </div>
+    <div class="cover-tag-wrap">
+      <div class="cover-tag">Brand & Digital Proposal</div>
     </div>
-
   </div>
-</section>
 
-<!-- STRIP -->
-<div class="strip">
-  <span class="strip-label">Trusted for</span>
-  <div class="strip-divider"></div>
-  <div class="strip-items">
-    <span class="strip-item">Corporate Events</span>
-    <span class="strip-item">Private Dinners</span>
-    <span class="strip-item">Weddings</span>
-    <span class="strip-item">Product Launches</span>
-    <span class="strip-item">Galas & Fundraisers</span>
+  <div class="cover-mid">
+    <div class="cover-eyebrow">Prepared for Una Pizza Foodtruck</div>
+    <h1 class="cover-h1">Una<br><em>Pizza.</em></h1>
+    <p class="cover-tagline">Brand Identity · Digital Presence · Social Media Strategy</p>
+    <div class="cover-pills">
+      <div class="pill"><div class="pill-dot"></div>Brand Strategy</div>
+      <div class="pill"><div class="pill-dot"></div>Visual Identity</div>
+      <div class="pill"><div class="pill-dot"></div>Website</div>
+      <div class="pill"><div class="pill-dot"></div>Social Media</div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cb-meta">
+      <strong>Prepared for</strong>
+      Una Pizza Foodtruck<br>Vilassar de Mar / Cabrils
+    </div>
+    <div class="cb-line"></div>
+    <div class="cb-meta right">
+      <strong>Date</strong>
+      April 2026<br>Valid 30 days
+    </div>
   </div>
 </div>
+</div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="eyebrow">What We Offer</div>
-  <h2 class="h2">The right person<br>for every role</h2>
-  <p class="sub">From intimate gatherings to large-scale corporate events — fully staffed and professionally managed.</p>
-  <div class="grid-3">
-    <div class="card">
-      <div class="card-icon">🍽️</div>
-      <h3 class="card-title">Event Servers</h3>
-      <p class="card-text">Polished professionals for fine dining, cocktail receptions, and corporate events. Always punctual, always prepared.</p>
+<!-- ═══════ INTRO ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">00</span><div class="sec-line"></div>Introduction</div>
+  <h2 class="sec-title">A brand as good<br>as the <em>pizza itself.</em></h2>
+  <p class="sec-body">
+    Una Pizza has something most businesses spend years trying to build — a real product, a loyal following, and an authentic story. What's missing is a brand system that communicates all of that clearly, consistently, and in a way that attracts the right clients.
+  </p>
+  <div class="intro-quote">
+    "The goal isn't to look bigger than you are. It's to look exactly as good as you already are."
+  </div>
+  <p class="sec-body">
+    This proposal outlines a focused, practical plan to define your brand, build your digital presence, and give your social media manager the tools to represent Una Pizza consistently — without relying on guesswork.
+  </p>
+</div>
+</div>
+
+<!-- ═══════ DIAGNOSIS ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">01</span><div class="sec-line"></div>Where We Are Now</div>
+  <h2 class="sec-title">What's working.<br>What <em>isn't.</em></h2>
+  <p class="sec-body">
+    Before building anything new, we need to be honest about what's holding Una Pizza back from the growth it deserves.
+  </p>
+
+  <div class="diag-grid">
+    <div class="diag-card">
+      <div class="diag-icon">🎨</div>
+      <div class="diag-title">No clear visual identity</div>
+      <div class="diag-body">The logo and visual elements aren't consistent across touchpoints. A potential client can't immediately recognise Una Pizza across Instagram, the van, and a flyer.</div>
+      <div class="diag-tag">Brand</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🍸</div>
-      <h3 class="card-title">Bartenders</h3>
-      <p class="card-text">Experienced bartenders for open bars, craft cocktail experiences, and private events. California-certified.</p>
+    <div class="diag-card">
+      <div class="diag-icon">🗣️</div>
+      <div class="diag-title">No defined brand voice</div>
+      <div class="diag-body">Every caption, message and reply sounds slightly different. Without a defined voice, the brand feels inconsistent — even if the product is always excellent.</div>
+      <div class="diag-tag">Communication</div>
     </div>
-    <div class="card">
-      <div class="card-icon">🎯</div>
-      <h3 class="card-title">Event Coordinators</h3>
-      <p class="card-text">On-site coordinators who manage logistics, direct staff, and ensure flawless execution from setup to teardown.</p>
+    <div class="diag-card">
+      <div class="diag-icon">📱</div>
+      <div class="diag-title">Social media without direction</div>
+      <div class="diag-body">Great content exists but there's no strategy behind it. The manager doesn't have clear guidelines on what to post, when, or why — so results are unpredictable.</div>
+      <div class="diag-tag">Social Media</div>
     </div>
-    <div class="card">
-      <div class="card-icon">✨</div>
-      <h3 class="card-title">Brand Ambassadors</h3>
-      <p class="card-text">Engaging ambassadors for product launches, activations, and experiential marketing events across the Bay Area.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">🏠</div>
-      <h3 class="card-title">Housekeeping</h3>
-      <p class="card-text">Discreet, thorough professionals for private residences, estates, and hospitality venues requiring white-glove service.</p>
-    </div>
-    <div class="card">
-      <div class="card-icon">⚡</div>
-      <h3 class="card-title">Last-Minute Staffing</h3>
-      <p class="card-text">Emergency solutions with as little as 24-hour notice. Our roster is always ready so your event never falls short.</p>
+    <div class="diag-card">
+      <div class="diag-icon">🌐</div>
+      <div class="diag-title">No digital home base</div>
+      <div class="diag-body">Without a professional website, potential corporate and premium clients have nowhere to evaluate Una Pizza properly. Instagram alone isn't enough for higher-value bookings.</div>
+      <div class="diag-tag">Digital</div>
     </div>
   </div>
-</section>
+</div>
+</div>
 
-<!-- WHY -->
-<section class="why" id="why">
-  <div class="why-inner">
+<!-- ═══════ DELIVERABLES ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">02</span><div class="sec-line"></div>Scope of Work</div>
+  <h2 class="sec-title">What we will<br><em>build together.</em></h2>
+  <p class="sec-body">
+    Five deliverables. Each one builds on the last. Together they create a complete brand and digital system that represents Una Pizza at its best.
+  </p>
+
+  <div class="del-list">
+
+    <div class="deliverable">
+      <div class="del-num">01</div>
+      <div>
+        <div class="del-badge">Foundation</div>
+        <div class="del-title">Brand Strategy Document</div>
+        <div class="del-desc">The foundation everything is built on. A clear, written definition of who Una Pizza is, who it serves, and where it's going.</div>
+        <ul class="del-items">
+          <li>Brand positioning — what makes Una Pizza distinct in the market</li>
+          <li>Ideal client profile — who you want to attract and why</li>
+          <li>Unique value proposition — the one thing only Una Pizza offers</li>
+          <li>3-year vision — how the brand needs to be built to support future growth</li>
+          <li>Core brand values — 3 values that guide every decision</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">02</div>
+      <div>
+        <div class="del-badge">Identity</div>
+        <div class="del-title">Logo Direction & Visual Identity</div>
+        <div class="del-desc">A complete visual brief that defines the logo direction, colour palette, and typography. Includes creative direction — I can design the initial logo concept or collaborate directly with your designer for final execution.</div>
+        <ul class="del-items">
+          <li>Colour palette — defined and approved before design begins</li>
+          <li>Typography system — primary and secondary fonts confirmed</li>
+          <li>Visual moodboard — 3 directions presented, 1 chosen</li>
+          <li>Logo concept — initial version created by me or handed to external designer with full brief</li>
+          <li>Logo review and refinement — we approve the final design together</li>
+          <li>All final files delivered: SVG, PNG, PDF — light and dark versions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">03</div>
+      <div>
+        <div class="del-badge">Voice</div>
+        <div class="del-title">Brand Voice Document</div>
+        <div class="del-desc">A practical guide that defines exactly how Una Pizza communicates — so every caption, reply, and message sounds like the same brand.</div>
+        <ul class="del-items">
+          <li>Tone of voice definition with real examples</li>
+          <li>Do's and don'ts for written communication</li>
+          <li>Caption templates for the 3 main content types</li>
+          <li>How to respond to inquiries, reviews, and comments</li>
+          <li>Language guide — when to use Spanish, Catalan, or English</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">04</div>
+      <div>
+        <div class="del-badge">Strategy</div>
+        <div class="del-title">Social Media Strategy + Content Calendar</div>
+        <div class="del-desc">A complete system your social media manager can follow without guessing. Not management — a clear roadmap that makes management easy and results measurable.</div>
+        <ul class="del-items">
+          <li>5 content pillars — what to post and why for each category</li>
+          <li>Monthly content calendar template in Google Sheets</li>
+          <li>Manager guidance document — rules, formats, frequencies</li>
+          <li>Reel formula that works for food and events content</li>
+          <li>90-day goal — defined metrics to track progress</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">05</div>
+      <div>
+        <div class="del-badge">Digital</div>
+        <div class="del-title">Website + Quote Page</div>
+        <div class="del-desc">A professional website that works as a business tool — not just a digital brochure. Clients can explore services and request a quote directly.</div>
+        <ul class="del-items">
+          <li>Home page — brand story, services overview, gallery, testimonials</li>
+          <li>3 service pages — Pizza Events, Bar Service, Corporate Catering</li>
+          <li>Quote request forms — one per service with smart questions</li>
+          <li>Automatic quote email sent to client on submission</li>
+          <li>Mobile-first design — optimised for how clients actually browse</li>
+          <li>Available in Spanish and English</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GRAPHIC DESIGN ADD-ON -->
+  <div class="addon-box">
     <div>
-      <div class="eyebrow">Why Aligna</div>
-      <h2 class="h2">The standard<br>Bay Area expects</h2>
-      <p class="sub" style="margin-bottom:0;">We don't fill positions. We match the right person to your event culture, brief, and brand.</p>
-      <div class="points">
-        <div class="point">
-          <div class="point-dot">✓</div>
-          <div>
-            <h4>Pre-vetted professionals only</h4>
-            <p>Every staff member is background-checked and personally approved before joining our roster.</p>
-          </div>
-        </div>
-        <div class="point">
-          <div class="point-dot">⚡</div>
-          <div>
-            <h4>48-hour booking guarantee</h4>
-            <p>Submit your request and receive confirmed staff within 48 hours — or same day for urgent events.</p>
-          </div>
-        </div>
-        <div class="point">
-          <div class="point-dot">🛡️</div>
-          <div>
-            <h4>Fully insured and compliant</h4>
-            <p>All staff are covered by Aligna's general liability insurance from day one.</p>
-          </div>
-        </div>
-        <div class="point">
-          <div class="point-dot">📱</div>
-          <div>
-            <h4>Real-time coordination</h4>
-            <p>Direct line to your coordinator throughout the event. Issues resolved before guests notice.</p>
-          </div>
-        </div>
+      <div class="addon-title">+ Graphic Design Support — Optional Add-on</div>
+      <div class="addon-desc">Need additional branded materials? I can design social media templates, event menus, flyers, packaging mockups, or any other visual assets using the approved brand identity. Priced separately per project.</div>
+    </div>
+    <div class="addon-price">
+      On request
+      <span>Quote per project</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ TIMELINE ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">03</span><div class="sec-line"></div>Timeline</div>
+  <h2 class="sec-title">From brief to <em>live</em><br>in four weeks.</h2>
+  <p class="sec-body">
+    A clear, structured process. Each week has defined deliverables so you always know what's happening and what's next.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active">1</div>
+      <div>
+        <div class="tl-week">Week One</div>
+        <div class="tl-title">Discovery & Strategy</div>
+        <div class="tl-items">Brand questionnaire completed · Strategy session call (30 min) · Brand Strategy Document delivered · Visual direction moodboard presented</div>
       </div>
     </div>
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-n">500<span>+</span></div>
-        <div class="metric-l">Events successfully staffed across the San Francisco Bay Area</div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div>
+        <div class="tl-week">Week Two</div>
+        <div class="tl-title">Identity & Voice</div>
+        <div class="tl-items">Visual direction approved · Logo concept created or brief sent to designer · Brand Voice Document delivered · Social Media Strategy delivered</div>
       </div>
-      <div class="metric">
-        <div class="metric-n">98<span>%</span></div>
-        <div class="metric-l">Client satisfaction rate</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div>
+        <div class="tl-week">Week Three</div>
+        <div class="tl-title">Logo & Website Build</div>
+        <div class="tl-items">Logo finalised and approved · Website built with approved branding · Content Calendar template delivered · Manager Guidance document delivered</div>
       </div>
-      <div class="metric">
-        <div class="metric-n">24<span>h</span></div>
-        <div class="metric-l">Emergency staffing available</div>
-      </div>
-      <div class="metric">
-        <div class="metric-n">100<span>%</span></div>
-        <div class="metric-l">Vetted & insured staff</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div>
+        <div class="tl-week">Week Four</div>
+        <div class="tl-title">Launch & Handover</div>
+        <div class="tl-items">Logo delivered in all formats · Website reviewed, adjusted and live · Full brand kit handed over · 1 follow-up call included · Project complete</div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="eyebrow">How It Works</div>
-  <h2 class="h2">Staffed in 4 steps</h2>
-  <p class="sub">Simple, fast, reliable. From your first message to a fully staffed event.</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-n">STEP 01</div>
-      <div class="step-line"></div>
-      <h3>Submit Request</h3>
-      <p>Tell us your event date, location, number of staff needed, and any special requirements.</p>
+</div>
+</div>
+
+<!-- ═══════ PRICING ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">04</span><div class="sec-line"></div>Investment</div>
+  <h2 class="sec-title">Clear pricing.<br>No <em>surprises.</em></h2>
+  <p class="sec-body">
+    One fixed investment for the complete scope. No hourly billing, no scope creep, no hidden costs. Estimated 40+ hours of work across strategy, design direction, and build.
+  </p>
+
+  <div class="pricing-table">
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Brand Strategy Document</strong>
+        Positioning, ideal client, values, 3-year vision
+        <div class="pr-time">~6–8 hours</div>
+      </div>
+      <div class="pr-price">€280</div>
     </div>
-    <div class="step">
-      <div class="step-n">STEP 02</div>
-      <div class="step-line"></div>
-      <h3>We Match Your Team</h3>
-      <p>We select pre-vetted staff that match your event type, dress code, and experience level.</p>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Logo Direction & Visual Identity</strong>
+        Moodboard, colour palette, typography, logo concept + files
+        <div class="pr-time">~6–8 hours</div>
+      </div>
+      <div class="pr-price">€220</div>
     </div>
-    <div class="step">
-      <div class="step-n">STEP 03</div>
-      <div class="step-line"></div>
-      <h3>Confirm & Brief</h3>
-      <p>You receive staff profiles and confirmation. We brief the team on your specific event needs.</p>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Brand Voice Document</strong>
+        Tone, examples, templates, multilingual guide
+        <div class="pr-time">~4–5 hours</div>
+      </div>
+      <div class="pr-price">€180</div>
     </div>
-    <div class="step">
-      <div class="step-n">STEP 04</div>
-      <div class="step-line"></div>
-      <h3>Flawless Execution</h3>
-      <p>Staff arrives 15 minutes early, fully prepared. We stay available throughout your event.</p>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Social Media Strategy + Content Calendar</strong>
+        5 pillars, calendar template, manager guidance, metrics
+        <div class="pr-time">~5–7 hours</div>
+      </div>
+      <div class="pr-price">€320</div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Website + Quote Page</strong>
+        Full site, 3 services, forms, mobile-first, bilingual
+        <div class="pr-time">~15–20 hours</div>
+      </div>
+      <div class="pr-price">€500</div>
+    </div>
+    <div class="pr-row total">
+      <div class="pr-name">
+        <strong>Total Investment</strong>
+        Complete brand & digital system · 4 weeks · 40+ hours
+      </div>
+      <div class="pr-price">€1,500</div>
     </div>
   </div>
-</section>
 
-<!-- CTA -->
-<section class="cta" id="contact">
-  <div class="cta-inner">
-    <h2>Ready to staff<br>your next event?</h2>
-    <p>Join Bay Area businesses who trust Aligna for their most important moments. Quote within 24 hours.</p>
-    <a href="quote.html" class="btn-white">Get a Free Quote →</a>
-    <div style="margin-top:16px;">
-      <a href="https://calendly.com/alignahq" target="_blank" style="color:rgba(255,255,255,0.7);font-size:13px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.3);padding-bottom:2px;">
-        Prefer to talk? Book a WhatsApp call →
-      </a>
+  <!-- PAYMENT METHODS -->
+  <div class="payment-box">
+    <div class="payment-title">Payment Methods Accepted</div>
+    <div class="payment-methods">
+      <div class="pay-method"><span class="pay-icon">🏦</span>Bank Transfer (ACH / SEPA)</div>
+      <div class="pay-method"><span class="pay-icon">💳</span>PayPal</div>
+      <div class="pay-method"><span class="pay-icon">💶</span>Bizum (Spain)</div>
+      <div class="pay-method"><span class="pay-icon">🌍</span>Wise (international)</div>
     </div>
   </div>
-</section>
 
-<!-- FOOTER -->
+  <p class="pricing-note">
+    Payment terms: 50% upfront (€750) to begin · 50% on website delivery (€750)<br>
+    If external designer is used for logo execution — designer cost is separate and paid directly by Una Pizza. Logo creative direction and brief is included in scope.<br>
+    Invoiced via CLK Advisory · Aligna LLC
+  </p>
+
+  <div class="not-included">
+    <div class="ni-title">Not included in this scope</div>
+    <ul class="ni-list">
+      <li>Social media management or content creation — we build the system, your team runs it</li>
+      <li>Photography or video production</li>
+      <li>Paid advertising or campaign management</li>
+      <li>External designer fees (if used for logo execution — brief and supervision included)</li>
+      <li>Ongoing website maintenance after launch — available as monthly retainer</li>
+      <li>Additional graphic design materials — quoted separately on request</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ CLOSING ═══════ -->
+<div class="wrap">
+<div class="closing">
+  <h2 class="closing-title">Ready to build<br>something <em>real?</em></h2>
+  <p class="closing-sub">
+    The product is already great. Let's make sure the brand matches it — and that the right clients can find you.
+  </p>
+  <a href="https://calendly.com/alignahq" target="_blank" class="cta-btn">Let's get started →</a>
+  <p class="closing-alt">
+    Prefer WhatsApp? <a href="https://calendly.com/alignahq" target="_blank">Book a call here</a> and we'll connect there.
+  </p>
+</div>
+
 <footer>
-  <div class="footer-logo">Align<span>a</span> LLC</div>
-  <p>© 2026 Aligna LLC</p>
-  <a href="/cdn-cgi/l/email-protection#fb9a9792
+  <div class="footer-copy">© 2026 CLK Advisory · Aligna LLC</div>
+  <div class="footer-right">Proposal valid 30 days · April 2026</div>
+</footer>
+</div>
+
+</body>
+</html>
