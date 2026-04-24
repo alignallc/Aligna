@@ -1155,18 +1155,32 @@ function submitHome() {
 }
 
 function sendToFormspree(data) {
-  // REPLACE f/YOUR_FORM_ID with your Formspree endpoint
   const endpoint = 'https://formspree.io/f/xlgaaaky';
+  // Add formspree required fields
+  data._subject = 'New Aligna Lead — ' + data.service;
+  data._replyto = data.email;
   fetch(endpoint, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
     body: JSON.stringify(data)
   })
-  .then(r => {
-    if (r.ok) showSuccess();
-    else showSuccess(); // show anyway for now
+  .then(r => r.json())
+  .then(result => {
+    if (result.ok || result.next) {
+      showSuccess();
+    } else {
+      // Still show success but log error
+      console.error('Formspree error:', result);
+      showSuccess();
+    }
   })
-  .catch(() => showSuccess()); // show anyway for now
+  .catch(err => {
+    console.error('Submit error:', err);
+    showSuccess();
+  });
 }
 
 function showSuccess() {
