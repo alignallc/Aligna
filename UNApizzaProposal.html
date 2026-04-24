@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal — Una Pizza · CLK Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #ffffff;
+  --off: #f8f8f6;
+  --ink: #0f0f0e;
+  --ink-mid: #2d2d2b;
+  --ink-light: #6b6b65;
+  --border: #e5e5e0;
+  --red: #cc2b0a;
+  --red-soft: #fff1ee;
+  --navy: #1a2d4a;
+  --blue: #4a90d9;
+  --sans: 'Plus Jakarta Sans', sans-serif;
+  --serif: 'Instrument Serif', serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* LAYOUT */
+.wrap { max-width: 840px; margin: 0 auto; padding: 0 40px; }
+
+/* ── COVER ─────────────────────────── */
+.cover {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #fff 60%, #fff8f6 100%);
+  z-index: 0;
+}
+
+.cover-watermark {
+  position: absolute;
+  font-family: var(--serif);
+  font-size: clamp(120px, 20vw, 220px);
+  font-style: italic;
+  color: rgba(204,43,10,0.04);
+  letter-spacing: -0.04em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover-top, .cover-mid, .cover-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.clk-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.clk-dot {
+  width: 36px; height: 36px;
+  background: var(--navy);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: white;
+}
+
+.clk-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.clk-sub {
+  font-size: 11px;
+  color: var(--ink-light);
+  font-weight: 400;
+}
+
+.cover-tag-wrap { text-align: right; }
+
+.cover-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(204,43,10,0.3);
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+
+/* COVER MIDDLE */
+.cover-mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 0;
+}
+
+.cover-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cover-eyebrow::before {
+  content: '';
+  width: 32px; height: 1.5px;
+  background: var(--red);
+}
+
+.cover-h1 {
+  font-family: var(--serif);
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.cover-h1 em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.cover-tagline {
+  font-size: 15px;
+  color: var(--ink-light);
+  font-weight: 400;
+  margin-top: 24px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.cover-pills {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-mid);
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+.pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* COVER BOTTOM */
+.cover-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 32px;
+}
+
+.cb-meta { font-size: 12px; color: var(--ink-light); line-height: 1.5; }
+.cb-meta strong { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.cb-meta.right { text-align: right; }
+.cb-line { width: 1px; height: 40px; background: var(--border); justify-self: center; }
+
+/* ── SECTIONS ─────────────────────── */
+.section {
+  padding: 88px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 48px;
+}
+
+.sec-num {
+  font-size: 10px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.sec-line {
+  width: 48px; height: 1px;
+  background: var(--border);
+}
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+
+.sec-title em { font-style: italic; color: var(--red); }
+
+.sec-body {
+  font-size: 15px;
+  color: var(--ink-light);
+  line-height: 1.85;
+  max-width: 560px;
+  font-weight: 400;
+}
+
+/* ── INTRO QUOTE ─────────────────── */
+.intro-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.8vw, 28px);
+  color: var(--ink-mid);
+  line-height: 1.45;
+  margin: 48px 0;
+  padding: 28px 32px;
+  background: var(--off);
+  border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── DIAGNOSIS GRID ─────────────── */
+.diag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+
+.diag-card {
+  background: var(--white);
+  padding: 28px 24px;
+  transition: background 0.2s;
+}
+
+.diag-card:hover { background: var(--red-soft); }
+
+.diag-icon {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.diag-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.diag-body {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+.diag-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* ── DELIVERABLES ───────────────── */
+.del-list { margin-top: 48px; }
+
+.deliverable {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 28px;
+  align-items: start;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.deliverable:last-child { border-bottom: none; }
+.deliverable:hover .del-num { color: var(--red); }
+
+.del-num {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-style: italic;
+  color: var(--border);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.del-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.del-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--red-soft);
+  color: var(--red);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.del-desc {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.del-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.del-items li {
+  font-size: 13px;
+  color: var(--ink-light);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.del-items li::before {
+  content: '→';
+  color: var(--red);
+  flex-shrink: 0;
+  font-size: 11px;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+/* ADD-ON */
+.addon-box {
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.addon-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.addon-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+
+.addon-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 28px;
+  color: white;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.addon-price span {
+  display: block;
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+/* ── TIMELINE ───────────────────── */
+.timeline {
+  margin-top: 48px;
+  position: relative;
+  padding-left: 52px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.tl-dot {
+  position: absolute;
+  left: -52px;
+  top: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+
+.tl-dot.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+.tl-week {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+
+.tl-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.tl-items {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.8;
+}
+
+/* ── PRICING ────────────────────── */
+.pricing-table {
+  margin-top: 48px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.pr-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  transition: background 0.2s;
+  gap: 16px;
+}
+
+.pr-row:hover { background: var(--off); }
+.pr-row:last-child { border-bottom: none; }
+
+.pr-row.total {
+  background: var(--ink);
+}
+.pr-row.total:hover { background: var(--ink-mid); }
+
+.pr-name {
+  font-size: 14px;
+  color: var(--ink-light);
+}
+
+.pr-name strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.pr-row.total .pr-name { color: rgba(255,255,255,0.55); }
+.pr-row.total .pr-name strong { color: white; font-size: 16px; }
+
+.pr-time {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 500;
+  margin-top: 3px;
+}
+
+.pr-row.total .pr-time { color: rgba(255,255,255,0.35); }
+
+.pr-price {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pr-row.total .pr-price {
+  color: var(--red);
+  font-size: 32px;
+}
+
+/* PAYMENT METHODS */
+.payment-box {
+  margin-top: 24px;
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.payment-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pay-method {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pay-icon { font-size: 16px; }
+
+.pricing-note {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-top: 16px;
+  line-height: 1.7;
+}
+
+/* NOT INCLUDED */
+.not-included {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 28px;
+}
+
+.ni-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+}
+
+.ni-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ni-list li {
+  font-size: 13px;
+  color: var(--ink-light);
+  display: flex;
+  gap: 12px;
+}
+
+.ni-list li::before {
+  content: '—';
+  color: var(--border);
+  flex-shrink: 0;
+}
+
+/* ── CLOSING ────────────────────── */
+.closing {
+  padding: 96px 0 80px;
+  text-align: center;
+}
+
+.closing-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.closing-title em { font-style: italic; color: var(--red); }
+
+.closing-sub {
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-bottom: 40px;
+  max-width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 15px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(204,43,10,0.25);
+}
+
+.cta-btn:hover {
+  background: #b02508;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(204,43,10,0.3);
+}
+
+.closing-alt {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+.closing-alt a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy, .footer-right {
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+}
+
+/* PRINT */
+@media print {
+  .section { page-break-inside: avoid; }
+  @page { size: A4; margin: 20mm; }
+}
+
+@media (max-width: 640px) {
+  .wrap { padding: 0 20px; }
+  .diag-grid { grid-template-columns: 1fr; }
+  .cover-h1 { font-size: 52px; }
+  .cover-bottom { grid-template-columns: 1fr; }
+  .cb-line { display: none; }
+  .deliverable { grid-template-columns: 40px 1fr; gap: 16px; }
+  .addon-box { grid-template-columns: 1fr; }
+  .addon-price { text-align: left; }
+  footer { flex-direction: column; gap: 8px; text-align: center; }
+  .payment-methods { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ COVER ═══════ -->
+<div class="wrap">
+<div class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-watermark">Una Pizza</div>
+
+  <div class="cover-top">
+    <div class="clk-mark">
+      <div class="clk-dot">C</div>
+      <div>
+        <div class="clk-name">Cristina Lee Kim</div>
+        <div class="clk-sub">CLK Advisory</div>
+      </div>
+    </div>
+    <div class="cover-tag-wrap">
+      <div class="cover-tag">Brand & Digital Proposal</div>
+    </div>
+  </div>
+
+  <div class="cover-mid">
+    <div class="cover-eyebrow">Prepared for Una Pizza Foodtruck</div>
+    <h1 class="cover-h1">Una<br><em>Pizza.</em></h1>
+    <p class="cover-tagline">Brand Identity · Digital Presence · Social Media Strategy</p>
+    <div class="cover-pills">
+      <div class="pill"><div class="pill-dot"></div>Brand Strategy</div>
+      <div class="pill"><div class="pill-dot"></div>Visual Identity</div>
+      <div class="pill"><div class="pill-dot"></div>Website</div>
+      <div class="pill"><div class="pill-dot"></div>Social Media</div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cb-meta">
+      <strong>Prepared for</strong>
+      Una Pizza Foodtruck<br>Vilassar de Mar / Cabrils
+    </div>
+    <div class="cb-line"></div>
+    <div class="cb-meta right">
+      <strong>Date</strong>
+      April 2026<br>Valid 30 days
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════ INTRO ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">00</span><div class="sec-line"></div>Introduction</div>
+  <h2 class="sec-title">A brand as good<br>as the <em>pizza itself.</em></h2>
+  <p class="sec-body">
+    Una Pizza has something most businesses spend years trying to build — a real product, a loyal following, and an authentic story. What's missing is a brand system that communicates all of that clearly, consistently, and in a way that attracts the right clients.
+  </p>
+  <div class="intro-quote">
+    "The goal isn't to look bigger than you are. It's to look exactly as good as you already are."
+  </div>
+  <p class="sec-body">
+    This proposal outlines a focused, practical plan to define your brand, build your digital presence, and give your social media manager the tools to represent Una Pizza consistently — without relying on guesswork.
+  </p>
+</div>
+</div>
+
+<!-- ═══════ DIAGNOSIS ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">01</span><div class="sec-line"></div>Where We Are Now</div>
+  <h2 class="sec-title">What's working.<br>What <em>isn't.</em></h2>
+  <p class="sec-body">
+    Before building anything new, we need to be honest about what's holding Una Pizza back from the growth it deserves.
+  </p>
+
+  <div class="diag-grid">
+    <div class="diag-card">
+      <div class="diag-icon">🎨</div>
+      <div class="diag-title">No clear visual identity</div>
+      <div class="diag-body">The logo and visual elements aren't consistent across touchpoints. A potential client can't immediately recognise Una Pizza across Instagram, the van, and a flyer.</div>
+      <div class="diag-tag">Brand</div>
+    </div>
+    <div class="diag-card">
+      <div class="diag-icon">🗣️</div>
+      <div class="diag-title">No defined brand voice</div>
+      <div class="diag-body">Every caption, message and reply sounds slightly different. Without a defined voice, the brand feels inconsistent — even if the product is always excellent.</div>
+      <div class="diag-tag">Communication</div>
+    </div>
+    <div class="diag-card">
+      <div class="diag-icon">📱</div>
+      <div class="diag-title">Social media without direction</div>
+      <div class="diag-body">Great content exists but there's no strategy behind it. The manager doesn't have clear guidelines on what to post, when, or why — so results are unpredictable.</div>
+      <div class="diag-tag">Social Media</div>
+    </div>
+    <div class="diag-card">
+      <div class="diag-icon">🌐</div>
+      <div class="diag-title">No digital home base</div>
+      <div class="diag-body">Without a professional website, potential corporate and premium clients have nowhere to evaluate Una Pizza properly. Instagram alone isn't enough for higher-value bookings.</div>
+      <div class="diag-tag">Digital</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════ DELIVERABLES ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">02</span><div class="sec-line"></div>Scope of Work</div>
+  <h2 class="sec-title">What we will<br><em>build together.</em></h2>
+  <p class="sec-body">
+    Five deliverables. Each one builds on the last. Together they create a complete brand and digital system that represents Una Pizza at its best.
+  </p>
+
+  <div class="del-list">
+
+    <div class="deliverable">
+      <div class="del-num">01</div>
+      <div>
+        <div class="del-badge">Foundation</div>
+        <div class="del-title">Brand Strategy Document</div>
+        <div class="del-desc">The foundation everything is built on. A clear, written definition of who Una Pizza is, who it serves, and where it's going.</div>
+        <ul class="del-items">
+          <li>Brand positioning — what makes Una Pizza distinct in the market</li>
+          <li>Ideal client profile — who you want to attract and why</li>
+          <li>Unique value proposition — the one thing only Una Pizza offers</li>
+          <li>3-year vision — how the brand needs to be built to support future growth</li>
+          <li>Core brand values — 3 values that guide every decision</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">02</div>
+      <div>
+        <div class="del-badge">Identity</div>
+        <div class="del-title">Logo Direction & Visual Identity</div>
+        <div class="del-desc">A complete visual brief that defines the logo direction, colour palette, and typography. Includes creative direction — I can design the initial logo concept or collaborate directly with your designer for final execution.</div>
+        <ul class="del-items">
+          <li>Colour palette — defined and approved before design begins</li>
+          <li>Typography system — primary and secondary fonts confirmed</li>
+          <li>Visual moodboard — 3 directions presented, 1 chosen</li>
+          <li>Logo concept — initial version created by me or handed to external designer with full brief</li>
+          <li>Logo review and refinement — we approve the final design together</li>
+          <li>All final files delivered: SVG, PNG, PDF — light and dark versions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">03</div>
+      <div>
+        <div class="del-badge">Voice</div>
+        <div class="del-title">Brand Voice Document</div>
+        <div class="del-desc">A practical guide that defines exactly how Una Pizza communicates — so every caption, reply, and message sounds like the same brand.</div>
+        <ul class="del-items">
+          <li>Tone of voice definition with real examples</li>
+          <li>Do's and don'ts for written communication</li>
+          <li>Caption templates for the 3 main content types</li>
+          <li>How to respond to inquiries, reviews, and comments</li>
+          <li>Language guide — when to use Spanish, Catalan, or English</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">04</div>
+      <div>
+        <div class="del-badge">Strategy</div>
+        <div class="del-title">Social Media Strategy + Content Calendar</div>
+        <div class="del-desc">A complete system your social media manager can follow without guessing. Not management — a clear roadmap that makes management easy and results measurable.</div>
+        <ul class="del-items">
+          <li>5 content pillars — what to post and why for each category</li>
+          <li>Monthly content calendar template in Google Sheets</li>
+          <li>Manager guidance document — rules, formats, frequencies</li>
+          <li>Reel formula that works for food and events content</li>
+          <li>90-day goal — defined metrics to track progress</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-num">05</div>
+      <div>
+        <div class="del-badge">Digital</div>
+        <div class="del-title">Website + Quote Page</div>
+        <div class="del-desc">A professional website that works as a business tool — not just a digital brochure. Clients can explore services and request a quote directly.</div>
+        <ul class="del-items">
+          <li>Home page — brand story, services overview, gallery, testimonials</li>
+          <li>3 service pages — Pizza Events, Bar Service, Corporate Catering</li>
+          <li>Quote request forms — one per service with smart questions</li>
+          <li>Automatic quote email sent to client on submission</li>
+          <li>Mobile-first design — optimised for how clients actually browse</li>
+          <li>Available in Spanish and English</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GRAPHIC DESIGN ADD-ON -->
+  <div class="addon-box">
+    <div>
+      <div class="addon-title">+ Graphic Design Support — Optional Add-on</div>
+      <div class="addon-desc">Need additional branded materials? I can design social media templates, event menus, flyers, packaging mockups, or any other visual assets using the approved brand identity. Priced separately per project.</div>
+    </div>
+    <div class="addon-price">
+      On request
+      <span>Quote per project</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ TIMELINE ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">03</span><div class="sec-line"></div>Timeline</div>
+  <h2 class="sec-title">From brief to <em>live</em><br>in four weeks.</h2>
+  <p class="sec-body">
+    A clear, structured process. Each week has defined deliverables so you always know what's happening and what's next.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot active">1</div>
+      <div>
+        <div class="tl-week">Week One</div>
+        <div class="tl-title">Discovery & Strategy</div>
+        <div class="tl-items">Brand questionnaire completed · Strategy session call (30 min) · Brand Strategy Document delivered · Visual direction moodboard presented</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div>
+        <div class="tl-week">Week Two</div>
+        <div class="tl-title">Identity & Voice</div>
+        <div class="tl-items">Visual direction approved · Logo concept created or brief sent to designer · Brand Voice Document delivered · Social Media Strategy delivered</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div>
+        <div class="tl-week">Week Three</div>
+        <div class="tl-title">Logo & Website Build</div>
+        <div class="tl-items">Logo finalised and approved · Website built with approved branding · Content Calendar template delivered · Manager Guidance document delivered</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div>
+        <div class="tl-week">Week Four</div>
+        <div class="tl-title">Launch & Handover</div>
+        <div class="tl-items">Logo delivered in all formats · Website reviewed, adjusted and live · Full brand kit handed over · 1 follow-up call included · Project complete</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ PRICING ═══════ -->
+<div class="wrap">
+<div class="section">
+  <div class="sec-label"><span class="sec-num">04</span><div class="sec-line"></div>Investment</div>
+  <h2 class="sec-title">Clear pricing.<br>No <em>surprises.</em></h2>
+  <p class="sec-body">
+    One fixed investment for the complete scope. No hourly billing, no scope creep, no hidden costs. Estimated 40+ hours of work across strategy, design direction, and build.
+  </p>
+
+  <div class="pricing-table">
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Brand Strategy Document</strong>
+        Positioning, ideal client, values, 3-year vision
+        <div class="pr-time">~6–8 hours</div>
+      </div>
+      <div class="pr-price">€280</div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Logo Direction & Visual Identity</strong>
+        Moodboard, colour palette, typography, logo concept + files
+        <div class="pr-time">~6–8 hours</div>
+      </div>
+      <div class="pr-price">€220</div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Brand Voice Document</strong>
+        Tone, examples, templates, multilingual guide
+        <div class="pr-time">~4–5 hours</div>
+      </div>
+      <div class="pr-price">€180</div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Social Media Strategy + Content Calendar</strong>
+        5 pillars, calendar template, manager guidance, metrics
+        <div class="pr-time">~5–7 hours</div>
+      </div>
+      <div class="pr-price">€320</div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">
+        <strong>Website + Quote Page</strong>
+        Full site, 3 services, forms, mobile-first, bilingual
+        <div class="pr-time">~15–20 hours</div>
+      </div>
+      <div class="pr-price">€500</div>
+    </div>
+    <div class="pr-row total">
+      <div class="pr-name">
+        <strong>Total Investment</strong>
+        Complete brand & digital system · 4 weeks · 40+ hours
+      </div>
+      <div class="pr-price">€1,500</div>
+    </div>
+  </div>
+
+  <!-- PAYMENT METHODS -->
+  <div class="payment-box">
+    <div class="payment-title">Payment Methods Accepted</div>
+    <div class="payment-methods">
+      <div class="pay-method"><span class="pay-icon">🏦</span>Bank Transfer (ACH / SEPA)</div>
+      <div class="pay-method"><span class="pay-icon">💳</span>PayPal</div>
+      <div class="pay-method"><span class="pay-icon">💶</span>Bizum (Spain)</div>
+      <div class="pay-method"><span class="pay-icon">🌍</span>Wise (international)</div>
+    </div>
+  </div>
+
+  <p class="pricing-note">
+    Payment terms: 50% upfront (€750) to begin · 50% on website delivery (€750)<br>
+    If external designer is used for logo execution — designer cost is separate and paid directly by Una Pizza. Logo creative direction and brief is included in scope.<br>
+    Invoiced via CLK Advisory · Aligna LLC
+  </p>
+
+  <div class="not-included">
+    <div class="ni-title">Not included in this scope</div>
+    <ul class="ni-list">
+      <li>Social media management or content creation — we build the system, your team runs it</li>
+      <li>Photography or video production</li>
+      <li>Paid advertising or campaign management</li>
+      <li>External designer fees (if used for logo execution — brief and supervision included)</li>
+      <li>Ongoing website maintenance after launch — available as monthly retainer</li>
+      <li>Additional graphic design materials — quoted separately on request</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ CLOSING ═══════ -->
+<div class="wrap">
+<div class="closing">
+  <h2 class="closing-title">Ready to build<br>something <em>real?</em></h2>
+  <p class="closing-sub">
+    The product is already great. Let's make sure the brand matches it — and that the right clients can find you.
+  </p>
+  <a href="https://calendly.com/alignahq" target="_blank" class="cta-btn">Let's get started →</a>
+  <p class="closing-alt">
+    Prefer WhatsApp? <a href="https://calendly.com/alignahq" target="_blank">Book a call here</a> and we'll connect there.
+  </p>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 CLK Advisory · Aligna LLC</div>
+  <div class="footer-right">Proposal valid 30 days · April 2026</div>
+</footer>
+</div>
+
+</body>
+</html>
