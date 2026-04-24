@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote — Aligna LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:#f7f9fc;
+  color:#1a2d4a;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 60px;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(247,249,252,0.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid #e4edf8;
+}
+.logo{font-size:17px;font-weight:700;color:#1a2d4a;letter-spacing:-0.3px;text-decoration:none;}
+.logo span{color:#4a90d9;}
+.nav-back{
+  font-size:13px;font-weight:600;color:#4a6080;
+  text-decoration:none;display:flex;align-items:center;gap:6px;
+  transition:color 0.2s;
+}
+.nav-back:hover{color:#1a2d4a;}
+
+/* HERO */
+.page-hero{
+  padding:120px 60px 40px;
+  text-align:center;
+  max-width:600px;
+  margin:0 auto;
+}
+.page-hero h1{
+  font-size:clamp(28px,4vw,42px);
+  font-weight:700;
+  letter-spacing:-1.5px;
+  color:#1a2d4a;
+  margin-bottom:14px;
+  line-height:1.1;
+}
+.page-hero h1 em{font-style:italic;color:#4a90d9;}
+.page-hero p{
+  font-size:15px;color:#4a6080;
+  line-height:1.7;
+}
+
+/* SERVICE PICKER */
+.service-picker{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  max-width:700px;
+  margin:40px auto 60px;
+  padding:0 60px;
+}
+.service-card{
+  background:white;
+  border:2px solid #e4edf8;
+  border-radius:20px;
+  padding:36px 32px;
+  cursor:pointer;
+  transition:all 0.25s;
+  text-align:left;
+  position:relative;
+  overflow:hidden;
+}
+.service-card:hover{
+  border-color:#4a90d9;
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(74,144,217,0.12);
+}
+.service-card.active{
+  border-color:#1a2d4a;
+  background:#1a2d4a;
+  color:white;
+}
+.service-icon{
+  font-size:32px;
+  margin-bottom:16px;
+  display:block;
+}
+.service-card h3{
+  font-size:18px;font-weight:700;
+  letter-spacing:-0.5px;
+  margin-bottom:8px;
+  color:#1a2d4a;
+}
+.service-card.active h3{color:white;}
+.service-card p{
+  font-size:13px;
+  color:#4a6080;
+  line-height:1.6;
+}
+.service-card.active p{color:rgba(255,255,255,0.7);}
+.service-arrow{
+  position:absolute;bottom:20px;right:20px;
+  font-size:18px;opacity:0;
+  transition:opacity 0.2s;
+}
+.service-card:hover .service-arrow,
+.service-card.active .service-arrow{opacity:1;}
+
+/* FORM CONTAINER */
+.form-wrap{
+  max-width:780px;
+  margin:0 auto 80px;
+  padding:0 60px;
+  display:none;
+}
+.form-wrap.visible{display:block;}
+
+/* PROGRESS */
+.progress-bar{
+  display:flex;
+  align-items:center;
+  margin-bottom:40px;
+  gap:0;
+}
+.prog-step{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1;
+}
+.prog-num{
+  width:32px;height:32px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;
+  background:#e4edf8;color:#8fa5bf;
+  flex-shrink:0;
+  transition:all 0.3s;
+}
+.prog-num.done{background:#2E7D5A;color:white;}
+.prog-num.active{background:#1a2d4a;color:white;}
+.prog-label{
+  font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  color:#8fa5bf;
+  transition:color 0.3s;
+}
+.prog-label.active{color:#1a2d4a;}
+.prog-label.done{color:#2E7D5A;}
+.prog-line{
+  flex:1;height:1.5px;
+  background:#e4edf8;
+  margin:0 12px;
+  position:relative;
+  overflow:hidden;
+}
+.prog-line-fill{
+  position:absolute;top:0;left:0;
+  height:100%;width:0%;
+  background:#1a2d4a;
+  transition:width 0.5s ease;
+}
+
+/* STEPS */
+.step{display:none;}
+.step.active{display:block;animation:fadeUp 0.4s ease forwards;}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.step-title{
+  font-size:22px;font-weight:700;
+  letter-spacing:-0.8px;
+  margin-bottom:6px;
+  color:#1a2d4a;
+}
+.step-sub{
+  font-size:14px;color:#4a6080;
+  margin-bottom:32px;
+  line-height:1.6;
+}
+
+/* FORM ELEMENTS */
+.field{margin-bottom:20px;}
+.field label{
+  display:block;
+  font-size:12px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  color:#4a6080;margin-bottom:8px;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:13px 16px;
+  border:1.5px solid #e4edf8;
+  border-radius:10px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;
+  color:#1a2d4a;
+  background:white;
+  transition:border-color 0.2s;
+  outline:none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{border-color:#4a90d9;}
+.field textarea{resize:vertical;min-height:90px;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+/* CHIP SELECTORS */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;}
+.chip{
+  padding:9px 18px;
+  border:1.5px solid #e4edf8;
+  border-radius:100px;
+  font-size:13px;font-weight:500;
+  color:#4a6080;
+  cursor:pointer;
+  transition:all 0.2s;
+  user-select:none;
+  background:white;
+}
+.chip:hover{border-color:#4a90d9;color:#1a2d4a;}
+.chip.selected{
+  background:#1a2d4a;
+  border-color:#1a2d4a;
+  color:white;
+}
+.chip.selected-blue{
+  background:#4a90d9;
+  border-color:#4a90d9;
+  color:white;
+}
+
+/* COUNTER */
+.counter-row{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  background:white;
+  border:1.5px solid #e4edf8;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+.counter-label{font-size:14px;font-weight:500;color:#1a2d4a;}
+.counter-sub{font-size:12px;color:#8fa5bf;margin-top:2px;}
+.counter-ctrl{
+  display:flex;align-items:center;gap:14px;
+}
+.counter-btn{
+  width:32px;height:32px;
+  border-radius:50%;
+  border:1.5px solid #e4edf8;
+  background:white;
+  font-size:16px;font-weight:600;
+  color:#1a2d4a;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.counter-btn:hover{border-color:#1a2d4a;background:#1a2d4a;color:white;}
+.counter-val{
+  font-size:18px;font-weight:700;
+  color:#1a2d4a;min-width:24px;text-align:center;
+}
+
+/* ESTIMATE BOX */
+.estimate-box{
+  background:linear-gradient(135deg,#1a2d4a 0%,#2563a8 100%);
+  border-radius:20px;
+  padding:32px;
+  color:white;
+  margin-bottom:28px;
+  text-align:center;
+}
+.estimate-label{
+  font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  opacity:0.6;margin-bottom:12px;
+}
+.estimate-amount{
+  font-size:52px;font-weight:700;
+  letter-spacing:-2px;line-height:1;
+  margin-bottom:8px;
+}
+.estimate-amount span{font-size:24px;font-weight:400;opacity:0.7;}
+.estimate-note{font-size:12px;opacity:0.6;line-height:1.5;}
+
+.team-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.1);
+  border-radius:100px;
+  padding:8px 16px;
+  font-size:13px;font-weight:600;
+  margin-top:16px;
+}
+
+/* SUMMARY LIST */
+.summary{
+  background:white;
+  border:1.5px solid #e4edf8;
+  border-radius:16px;
+  padding:24px;
+  margin-bottom:24px;
+}
+.summary-row{
+  display:flex;justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #f0f5fc;
+  font-size:13px;
+}
+.summary-row:last-child{border-bottom:none;}
+.summary-row span:first-child{color:#4a6080;}
+.summary-row span:last-child{font-weight:600;color:#1a2d4a;}
+
+/* PHOTO UPLOAD */
+.upload-zone{
+  border:2px dashed #e4edf8;
+  border-radius:12px;
+  padding:32px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.2s;
+  background:white;
+}
+.upload-zone:hover{border-color:#4a90d9;background:#f8fbff;}
+.upload-zone input{display:none;}
+.upload-icon{font-size:28px;margin-bottom:8px;}
+.upload-text{font-size:13px;color:#4a6080;}
+.upload-text strong{color:#4a90d9;}
+.upload-previews{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.upload-thumb{
+  width:64px;height:64px;
+  border-radius:8px;
+  object-fit:cover;
+  border:2px solid #e4edf8;
+}
+
+/* BUTTONS */
+.btn-row{
+  display:flex;justify-content:space-between;
+  align-items:center;
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid #e4edf8;
+}
+.btn-prev{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;font-weight:600;
+  color:#4a6080;background:transparent;
+  border:1.5px solid #e4edf8;
+  padding:13px 28px;border-radius:10px;
+  cursor:pointer;transition:all 0.2s;
+}
+.btn-prev:hover{border-color:#1a2d4a;color:#1a2d4a;}
+.btn-next{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;font-weight:700;
+  color:white;background:#1a2d4a;
+  border:none;
+  padding:13px 36px;border-radius:10px;
+  cursor:pointer;transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(26,45,74,0.2);
+}
+.btn-next:hover{background:#2563a8;transform:translateY(-1px);}
+.btn-submit{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:14px;font-weight:700;
+  color:white;background:#2E7D5A;
+  border:none;
+  padding:15px 40px;border-radius:10px;
+  cursor:pointer;transition:all 0.2s;
+  box-shadow:0 4px 20px rgba(46,125,90,0.25);
+}
+.btn-submit:hover{background:#246648;transform:translateY(-1px);}
+
+/* SUCCESS */
+.success-screen{
+  display:none;
+  text-align:center;
+  padding:60px 40px;
+  max-width:500px;
+  margin:0 auto;
+}
+.success-screen.visible{display:block;animation:fadeUp 0.5s ease;}
+.success-icon{font-size:56px;margin-bottom:20px;}
+.success-screen h2{
+  font-size:28px;font-weight:700;
+  letter-spacing:-1px;margin-bottom:12px;
+}
+.success-screen p{font-size:15px;color:#4a6080;line-height:1.7;margin-bottom:28px;}
+.btn-home{
+  display:inline-block;
+  background:#1a2d4a;color:white;
+  padding:13px 32px;border-radius:10px;
+  font-size:14px;font-weight:600;
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.btn-home:hover{background:#2563a8;}
+
+/* SECTION DIVIDER */
+.section-label{
+  font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#8fa5bf;margin-bottom:14px;
+  margin-top:28px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .page-hero{padding:100px 24px 30px;}
+  .service-picker{grid-template-columns:1fr;padding:0 24px;gap:14px;}
+  .form-wrap{padding:0 24px;}
+  .grid-2{grid-template-columns:1fr;}
+  .grid-3{grid-template-columns:1fr 1fr;}
+  .estimate-amount{font-size:38px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Align<span>a</span></a>
+  <a href="index.html" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="page-hero">
+  <h1>Get your <em>free</em> quote</h1>
+  <p>Tell us what you need. We'll match you with the right team and send a detailed proposal within 24 hours.</p>
+</div>
+
+<!-- SERVICE PICKER -->
+<div class="service-picker" id="servicePicker">
+  <div class="service-card" onclick="startFlow('event')">
+    <span class="service-icon">🎉</span>
+    <h3>Event Staffing</h3>
+    <p>Servers, bartenders, and coordinators for corporate events, weddings, private parties and more.</p>
+    <span class="service-arrow">→</span>
+  </div>
+  <div class="service-card" onclick="startFlow('home')">
+    <span class="service-icon">🏠</span>
+    <h3>Home Organizing</h3>
+    <p>Professional organizing for any space — kitchen, closets, garage, full home. We handle the chaos.</p>
+    <span class="service-arrow">→</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+  EVENT STAFFING FORM
+═══════════════════════════ -->
+<div class="form-wrap" id="eventForm">
+
+  <!-- Progress -->
+  <div class="progress-bar">
+    <div class="prog-step">
+      <div class="prog-num active" id="ep1">1</div>
+      <span class="prog-label active" id="el1">Your Event</span>
+    </div>
+    <div class="prog-line"><div class="prog-line-fill" id="eline1"></div></div>
+    <div class="prog-step">
+      <div class="prog-num" id="ep2">2</div>
+      <span class="prog-label" id="el2">Staff & Details</span>
+    </div>
+    <div class="prog-line"><div class="prog-line-fill" id="eline2"></div></div>
+    <div class="prog-step">
+      <div class="prog-num" id="ep3">3</div>
+      <span class="prog-label" id="el3">Your Quote</span>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step active" id="eStep1">
+    <div class="step-title">What type of event?</div>
+    <div class="step-sub">Select all that apply — we staff all event types across the Bay Area.</div>
+
+    <div class="field">
+      <label>Event Type</label>
+      <div class="chips">
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Corporate Dinner</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Private Party</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Wedding</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Product Launch</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Gala / Fundraiser</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Cocktail Reception</div>
+        <div class="chip" onclick="toggleChip(this,'eEventType')">Other</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Staff Needed</label>
+      <div class="chips">
+        <div class="chip" onclick="toggleChip(this,'eStaffType')">🍽️ Servers</div>
+        <div class="chip" onclick="toggleChip(this,'eStaffType')">🍸 Bartenders</div>
+        <div class="chip" onclick="toggleChip(this,'eStaffType')">🎯 Event Coordinator</div>
+        <div class="chip" onclick="toggleChip(this,'eStaffType')">🧹 Housekeeping</div>
+        <div class="chip" onclick="toggleChip(this,'eStaffType')">🍳 Kitchen Assistant</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="field">
+        <label>Event Date *</label>
+        <input type="date" id="eDate" min="">
+      </div>
+      <div class="field">
+        <label>City / Neighborhood *</label>
+        <input type="text" id="eCity" placeholder="e.g. San Francisco, Palo Alto">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="backToPicker()">← Change Service</button>
+      <button class="btn-next" onclick="eNext(1)">Next: Staff Details →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="eStep2">
+    <div class="step-title">Staff & event details</div>
+    <div class="step-sub">Help us match you with the right team size and experience level.</div>
+
+    <div class="section-label">Number of Staff</div>
+    <div id="eStaffCounters">
+      <div class="counter-row">
+        <div>
+          <div class="counter-label">Servers</div>
+          <div class="counter-sub">$50/hour per server</div>
+        </div>
+        <div class="counter-ctrl">
+          <button class="counter-btn" onclick="adjustCounter('eServers',-1)">−</button>
+          <span class="counter-val" id="eServers">0</span>
+          <button class="counter-btn" onclick="adjustCounter('eServers',1)">+</button>
+        </div>
+      </div>
+      <div class="counter-row">
+        <div>
+          <div class="counter-label">Bartenders</div>
+          <div class="counter-sub">$70/hour per bartender</div>
+        </div>
+        <div class="counter-ctrl">
+          <button class="counter-btn" onclick="adjustCounter('eBartenders',-1)">−</button>
+          <span class="counter-val" id="eBartenders">0</span>
+          <button class="counter-btn" onclick="adjustCounter('eBartenders',1)">+</button>
+        </div>
+      </div>
+      <div class="counter-row">
+        <div>
+          <div class="counter-label">Event Coordinator</div>
+          <div class="counter-sub">$85 flat fee per event</div>
+        </div>
+        <div class="counter-ctrl">
+          <button class="counter-btn" onclick="adjustCounter('eCoord',-1)">−</button>
+          <span class="counter-val" id="eCoord">0</span>
+          <button class="counter-btn" onclick="adjustCounter('eCoord',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="field">
+        <label>Start Time *</label>
+        <input type="time" id="eStartTime" onchange="calcHours()">
+      </div>
+      <div class="field">
+        <label>End Time *</label>
+        <input type="time" id="eEndTime" onchange="calcHours()">
+      </div>
+    </div>
+    <div class="hours-result" id="eHoursResult" style="display:none;margin-top:-8px;margin-bottom:16px;padding:12px 16px;background:#f0f7ff;border-radius:10px;font-size:13px;font-weight:600;color:#1a2d4a;">
+      ⏱️ <span id="eHoursText">0 hours</span>
+    </div>
+    <div class="field">
+        <label>Number of Guests</label>
+        <select id="eGuests">
+          <option value="">Approx. guest count</option>
+          <option value="under25">Under 25</option>
+          <option value="25-50">25 – 50</option>
+          <option value="50-100">50 – 100</option>
+          <option value="100-200">100 – 200</option>
+          <option value="200+">200+</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Additional Notes</label>
+      <textarea id="eNotes" placeholder="Dress code, special requirements, venue details..."></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="eGo(1)">← Back</button>
+      <button class="btn-next" onclick="eNext(2)">See My Estimate →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="eStep3">
+    <div class="step-title">Your staffing estimate</div>
+    <div class="step-sub">Based on your selections. Final quote confirmed after a quick call.</div>
+
+    <div class="estimate-box">
+      <div class="estimate-label">Estimated Investment</div>
+      <div class="estimate-amount" id="eTotal">$0 <span>starting at</span></div>
+      <div class="estimate-note">Final price confirmed within 24 hours · 50% upfront to secure your date</div>
+      <div class="team-badge" id="eTeamBadge">👥 Your team TBD</div>
+    </div>
+
+    <div class="summary" id="eSummary"></div>
+
+    <div class="section-label">Your Contact Details</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" id="eFirstName" placeholder="Jane">
+      </div>
+      <div class="field">
+        <label>Last Name *</label>
+        <input type="text" id="eLastName" placeholder="Smith">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" id="eEmail" placeholder="jane@company.com">
+      </div>
+      <div class="field">
+        <label>Phone / WhatsApp *</label>
+        <input type="tel" id="ePhone" placeholder="+1 (415) 000-0000">
+      </div>
+    </div>
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <input type="text" id="eSource" placeholder="Google, Thumbtack, referral...">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="eGo(2)">← Back</button>
+      <button class="btn-submit" onclick="submitEvent()">🎉 Request My Staff</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════
+  HOME ORGANIZING FORM
+═══════════════════════════ -->
+<div class="form-wrap" id="homeForm">
+
+  <!-- Progress -->
+  <div class="progress-bar">
+    <div class="prog-step">
+      <div class="prog-num active" id="hp1">1</div>
+      <span class="prog-label active" id="hl1">Your Space</span>
+    </div>
+    <div class="prog-line"><div class="prog-line-fill" id="hline1"></div></div>
+    <div class="prog-step">
+      <div class="prog-num" id="hp2">2</div>
+      <span class="prog-label" id="hl2">Scope & Details</span>
+    </div>
+    <div class="prog-line"><div class="prog-line-fill" id="hline2"></div></div>
+    <div class="prog-step">
+      <div class="prog-num" id="hp3">3</div>
+      <span class="prog-label" id="hl3">Photos</span>
+    </div>
+    <div class="prog-line"><div class="prog-line-fill" id="hline3"></div></div>
+    <div class="prog-step">
+      <div class="prog-num" id="hp4">4</div>
+      <span class="prog-label" id="hl4">Your Quote</span>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step active" id="hStep1">
+    <div class="step-title">Tell us about your space</div>
+    <div class="step-sub">This helps us send the right team size and give you an accurate estimate.</div>
+
+    <div class="field">
+      <label>Approximate Home Size *</label>
+      <div class="chips">
+        <div class="chip" onclick="selectSingle(this,'hSize')">Under 800 sq ft</div>
+        <div class="chip" onclick="selectSingle(this,'hSize')">800 – 1,200 sq ft</div>
+        <div class="chip" onclick="selectSingle(this,'hSize')">1,200 – 2,000 sq ft</div>
+        <div class="chip" onclick="selectSingle(this,'hSize')">2,000 – 3,000 sq ft</div>
+        <div class="chip" onclick="selectSingle(this,'hSize')">3,000+ sq ft</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Number of People in Household</label>
+      <div class="chips">
+        <div class="chip" onclick="selectSingle(this,'hPeople')">Lives alone</div>
+        <div class="chip" onclick="selectSingle(this,'hPeople')">2 people</div>
+        <div class="chip" onclick="selectSingle(this,'hPeople')">3–4 people</div>
+        <div class="chip" onclick="selectSingle(this,'hPeople')">5+ people</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Level of Clutter *</label>
+      <div class="chips">
+        <div class="chip" onclick="selectSingle(this,'hClutter')">💚 Light Clutter — just needs a refresh</div>
+        <div class="chip" onclick="selectSingle(this,'hClutter')">🟡 Heavy Clutter — significant buildup</div>
+        <div class="chip" onclick="selectSingle(this,'hClutter')">🔴 Complete Overhaul — start from scratch</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>City / Neighborhood *</label>
+      <input type="text" id="hCity" placeholder="e.g. San Jose, Palo Alto, Fremont">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="backToPicker()">← Change Service</button>
+      <button class="btn-next" onclick="hNext(1)">Next: Areas & Timeline →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="hStep2">
+    <div class="step-title">Which areas need attention?</div>
+    <div class="step-sub">Select all areas — each one is factored into your estimate and team size.</div>
+
+    <div class="field">
+      <label>Areas to Organize</label>
+      <div class="chips">
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🍳 Kitchen</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🛏️ Master Bedroom</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">👗 Walk-in Closet</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🛁 Bathroom(s)</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🚗 Garage</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">📦 Storage Room</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🏠 Living Room</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🍽️ Dining Room</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">👶 Kids Room</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">💼 Home Office</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">🧺 Laundry Room</div>
+        <div class="chip" onclick="toggleChip(this,'hAreas')">Full Home</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Timeline *</label>
+      <div class="chips">
+        <div class="chip" onclick="selectSingle(this,'hTimeline')">⚡ ASAP</div>
+        <div class="chip" onclick="selectSingle(this,'hTimeline')">This Week</div>
+        <div class="chip" onclick="selectSingle(this,'hTimeline')">Within 2 Weeks</div>
+        <div class="chip" onclick="selectSingle(this,'hTimeline')">This Month</div>
+        <div class="chip" onclick="selectSingle(this,'hTimeline')">Flexible</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Preferred Date (if known)</label>
+      <input type="date" id="hDate">
+    </div>
+
+    <div class="field">
+      <label>Special Notes</label>
+      <textarea id="hNotes" placeholder="Access instructions, pets, specific priorities, anything we should know..."></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="hGo(1)">← Back</button>
+      <button class="btn-next" onclick="hNext(2)">Next: Share Photos →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="hStep3">
+    <div class="step-title">Share a glimpse of your space</div>
+    <div class="step-sub">Optional but helpful — photos let us give you a more accurate quote. All photos are kept strictly confidential.</div>
+
+    <div class="upload-zone" onclick="document.getElementById('hPhotos').click()">
+      <input type="file" id="hPhotos" multiple accept="image/*" onchange="previewPhotos(this)">
+      <div class="upload-icon">📷</div>
+      <div class="upload-text">
+        <strong>Click to upload photos</strong> or drag and drop<br>
+        JPG, PNG, HEIC up to 10MB each · Max 6 photos
+      </div>
+      <div class="upload-previews" id="hPreviews"></div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px;background:#fff8e6;border-radius:10px;font-size:13px;color:#8a6a00;line-height:1.6;">
+      💡 <strong>Tip:</strong> Photos of the most cluttered areas help us plan the right team size and give you a precise quote faster.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="hGo(2)">← Back</button>
+      <button class="btn-next" onclick="hNext(3)">See My Estimate →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="hStep4">
+    <div class="step-title">Your organizing estimate</div>
+    <div class="step-sub">Based on your space and scope. Final quote provided after a free consultation call.</div>
+
+    <div class="estimate-box">
+      <div class="estimate-label">Estimated Investment</div>
+      <div class="estimate-amount" id="hTotal">$0 <span>–</span> $0</div>
+      <div class="estimate-note">Includes labor, supplies coordination & project management · Final quote after consultation</div>
+      <div class="team-badge" id="hTeamBadge">👥 Team size TBD</div>
+    </div>
+
+    <div class="summary" id="hSummary"></div>
+
+    <div class="section-label">Your Contact Details</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>First Name *</label>
+        <input type="text" id="hFirstName" placeholder="Jane">
+      </div>
+      <div class="field">
+        <label>Last Name *</label>
+        <input type="text" id="hLastName" placeholder="Smith">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Email *</label>
+        <input type="email" id="hEmail" placeholder="jane@email.com">
+      </div>
+      <div class="field">
+        <label>Phone / WhatsApp *</label>
+        <input type="tel" id="hPhone" placeholder="+1 (415) 000-0000">
+      </div>
+    </div>
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <input type="text" id="hSource" placeholder="Google, Thumbtack, referral...">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-prev" onclick="hGo(3)">← Back</button>
+      <button class="btn-submit" onclick="submitHome()">🏠 Request My Quote</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✅</div>
+  <h2>Request received!</h2>
+  <p>We'll review your details and get back to you within <strong>24 hours</strong> with a confirmed quote and next steps.<br><br>Check your email — a confirmation is on its way.</p>
+  <a href="index.html" class="btn-home">← Back to Aligna</a>
+</div>
+
+<script>
+// ── State ──────────────────────────────────
+const state = {
+  service: null,
+  eEventType: [], eStaffType: [],
+  eServers: 0, eBartenders: 0, eCoord: 0,
+  hSize: null, hClutter: null, hPeople: null,
+  hTimeline: null, hAreas: []
+};
+
+// ── Service picker ──────────────────────────
+function startFlow(service) {
+  state.service = service;
+  document.getElementById('servicePicker').style.display = 'none';
+  if (service === 'event') {
+    document.getElementById('eventForm').classList.add('visible');
+  } else {
+    document.getElementById('homeForm').classList.add('visible');
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function backToPicker() {
+  document.getElementById('servicePicker').style.display = 'grid';
+  document.getElementById('eventForm').classList.remove('visible');
+  document.getElementById('homeForm').classList.remove('visible');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── Chip helpers ────────────────────────────
+function toggleChip(el, key) {
+  el.classList.toggle('selected');
+  const val = el.textContent.trim();
+  if (!state[key]) state[key] = [];
+  const idx = state[key].indexOf(val);
+  if (idx > -1) state[key].splice(idx, 1);
+  else state[key].push(val);
+}
+
+function selectSingle(el, key) {
+  const parent = el.closest('.chips');
+  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state[key] = el.textContent.trim();
+}
+
+// ── Counter ─────────────────────────────────
+function adjustCounter(id, delta) {
+  const el = document.getElementById(id);
+  let val = parseInt(el.textContent) + delta;
+  if (val < 0) val = 0;
+  el.textContent = val;
+  state[id] = val;
+}
+
+// ── Event form navigation ───────────────────
+function eGo(step) {
+  document.querySelectorAll('#eventForm .step').forEach(s => s.classList.remove('active'));
+  document.getElementById('eStep' + step).classList.add('active');
+  updateEProgress(step);
+  window.scrollTo({top:80, behavior:'smooth'});
+}
+
+function eNext(from) {
+  if (from === 1) {
+    if (!document.getElementById('eDate').value || !document.getElementById('eCity').value) {
+      alert('Please fill in event date and city.'); return;
+    }
+  }
+  if (from === 2) {
+    const total = state.eServers + state.eBartenders + state.eCoord;
+    if (total === 0) { alert('Please select at least one staff member.'); return; }
+    if (!document.getElementById('eStartTime').value || !document.getElementById('eEndTime').value) {
+      alert('Please enter event start and end time.'); return;
+    }
+    const hrs = getHours();
+    if (hrs <= 0) { alert('End time must be after start time.'); return; }
+    buildEventEstimate();
+  }
+  eGo(from + 1);
+}
+
+function updateEProgress(step) {
+  for (let i = 1; i <= 3; i++) {
+    const num = document.getElementById('ep' + i);
+    const lbl = document.getElementById('el' + i);
+    num.className = 'prog-num' + (i < step ? ' done' : i === step ? ' active' : '');
+    lbl.className = 'prog-label' + (i < step ? ' done' : i === step ? ' active' : '');
+    if (i < step) num.textContent = '✓';
+    else num.textContent = i;
+  }
+  if (step > 1) document.getElementById('eline1').style.width = '100%';
+  if (step > 2) document.getElementById('eline2').style.width = '100%';
+}
+
+function getHours() {
+  const start = document.getElementById('eStartTime').value;
+  const end = document.getElementById('eEndTime').value;
+  if (!start || !end) return 0;
+  const [sh, sm] = start.split(':').map(Number);
+  const [eh, em] = end.split(':').map(Number);
+  let mins = (eh * 60 + em) - (sh * 60 + sm);
+  if (mins < 0) mins += 24 * 60; // overnight
+  return Math.round((mins / 60) * 10) / 10;
+}
+
+function calcHours() {
+  const hrs = getHours();
+  const result = document.getElementById('eHoursResult');
+  const text = document.getElementById('eHoursText');
+  if (hrs > 0) {
+    result.style.display = 'block';
+    text.textContent = hrs + ' hour' + (hrs !== 1 ? 's' : '') + ' · ' +
+      document.getElementById('eStartTime').value + ' → ' +
+      document.getElementById('eEndTime').value;
+  } else {
+    result.style.display = 'none';
+  }
+}
+
+function buildEventEstimate() {
+  const hours = getHours() || 4;
+  const servers = state.eServers || 0;
+  const bartenders = state.eBartenders || 0;
+  const coord = state.eCoord || 0;
+  const total = (servers * 50 + bartenders * 70) * hours + (coord * 85);
+  document.getElementById('eTotal').innerHTML = '$' + total.toLocaleString() + ' <span>estimated</span>';
+  const team = [];
+  if (servers) team.push(servers + ' Server' + (servers > 1 ? 's' : ''));
+  if (bartenders) team.push(bartenders + ' Bartender' + (bartenders > 1 ? 's' : ''));
+  if (coord) team.push('1 Coordinator');
+  document.getElementById('eTeamBadge').textContent = '👥 ' + team.join(' · ');
+  const date = document.getElementById('eDate').value;
+  const city = document.getElementById('eCity').value;
+  const guests = document.getElementById('eGuests').value;
+  const start = document.getElementById('eStartTime').value;
+  const end = document.getElementById('eEndTime').value;
+  document.getElementById('eSummary').innerHTML = `
+    <div class="summary-row"><span>Event Date</span><span>${date || 'TBD'}</span></div>
+    <div class="summary-row"><span>Time</span><span>${start} → ${end} (${hours}h)</span></div>
+    <div class="summary-row"><span>Location</span><span>${city}</span></div>
+    <div class="summary-row"><span>Event Type</span><span>${state.eEventType.join(', ') || 'Not specified'}</span></div>
+    <div class="summary-row"><span>Staff Types</span><span>${state.eStaffType.join(', ') || 'Mixed'}</span></div>
+    <div class="summary-row"><span>Guests</span><span>${guests || 'Not specified'}</span></div>
+    <div class="summary-row"><span>Team</span><span>${team.join(', ')}</span></div>
+    <div class="summary-row"><span>Rate</span><span>Servers $50/h · Bartenders $70/h</span></div>
+  `;
+}
+
+// ── Home form navigation ─────────────────────
+function hGo(step) {
+  document.querySelectorAll('#homeForm .step').forEach(s => s.classList.remove('active'));
+  document.getElementById('hStep' + step).classList.add('active');
+  updateHProgress(step);
+  window.scrollTo({top:80, behavior:'smooth'});
+}
+
+function hNext(from) {
+  if (from === 1) {
+    if (!state.hSize) { alert('Please select your home size.'); return; }
+    if (!state.hClutter) { alert('Please select clutter level.'); return; }
+    if (!document.getElementById('hCity').value) { alert('Please enter your city.'); return; }
+  }
+  if (from === 3) { buildHomeEstimate(); }
+  hGo(from + 1);
+}
+
+function updateHProgress(step) {
+  for (let i = 1; i <= 4; i++) {
+    const num = document.getElementById('hp' + i);
+    const lbl = document.getElementById('hl' + i);
+    num.className = 'prog-num' + (i < step ? ' done' : i === step ? ' active' : '');
+    lbl.className = 'prog-label' + (i < step ? ' done' : i === step ? ' active' : '');
+    if (i < step) num.textContent = '✓';
+    else num.textContent = i;
+  }
+  if (step > 1) document.getElementById('hline1').style.width = '100%';
+  if (step > 2) document.getElementById('hline2').style.width = '100%';
+  if (step > 3) document.getElementById('hline3').style.width = '100%';
+}
+
+function buildHomeEstimate() {
+  const sizeMap = {
+    'Under 800 sq ft': 300,
+    '800 – 1,200 sq ft': 450,
+    '1,200 – 2,000 sq ft': 650,
+    '2,000 – 3,000 sq ft': 900,
+    '3,000+ sq ft': 1200
+  };
+  let base = sizeMap[state.hSize] || 500;
+  const clutterMap = {
+    '💚 Light Clutter — just needs a refresh': 1,
+    '🟡 Heavy Clutter — significant buildup': 1.5,
+    '🔴 Complete Overhaul — start from scratch': 2.2
+  };
+  const multiplier = clutterMap[state.hClutter] || 1;
+  base = Math.round(base * multiplier);
+  const areaBonus = (state.hAreas.length > 0 && !state.hAreas.includes('Full Home'))
+    ? state.hAreas.length * 60 : 0;
+  const low = base + areaBonus;
+  const high = Math.round(low * 1.4);
+  // Team size logic
+  let team = '1 Organizer';
+  if (base > 800 || multiplier >= 1.5) team = '2 Organizers';
+  if (base > 1200 || multiplier >= 2) team = '2–3 Organizers';
+  document.getElementById('hTotal').innerHTML = '$' + low.toLocaleString() + ' <span>–</span> $' + high.toLocaleString();
+  document.getElementById('hTeamBadge').textContent = '👥 ' + team + ' recommended';
+  const areas = state.hAreas.length ? state.hAreas.join(', ') : 'Not specified';
+  document.getElementById('hSummary').innerHTML = `
+    <div class="summary-row"><span>Home Size</span><span>${state.hSize || 'TBD'}</span></div>
+    <div class="summary-row"><span>Clutter Level</span><span>${state.hClutter || 'TBD'}</span></div>
+    <div class="summary-row"><span>Areas</span><span>${areas}</span></div>
+    <div class="summary-row"><span>Household Size</span><span>${state.hPeople || 'Not specified'}</span></div>
+    <div class="summary-row"><span>Timeline</span><span>${state.hTimeline || 'Flexible'}</span></div>
+    <div class="summary-row"><span>Recommended Team</span><span>${team}</span></div>
+  `;
+}
+
+// ── Photo preview ───────────────────────────
+function previewPhotos(input) {
+  const previews = document.getElementById('hPreviews');
+  previews.innerHTML = '';
+  const files = Array.from(input.files).slice(0, 6);
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.className = 'upload-thumb';
+      previews.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── Submit ───────────────────────────────────
+function submitEvent() {
+  const first = document.getElementById('eFirstName').value;
+  const last = document.getElementById('eLastName').value;
+  const email = document.getElementById('eEmail').value;
+  const phone = document.getElementById('ePhone').value;
+  if (!first || !email || !phone) {
+    alert('Please fill in your name, email and phone.'); return;
+  }
+  // Send via Formspree — replace YOUR_FORM_ID with your actual ID
+  const data = {
+    service: 'Event Staffing',
+    name: first + ' ' + last,
+    email, phone,
+    eventType: state.eEventType.join(', '),
+    staffType: state.eStaffType.join(', '),
+    date: document.getElementById('eDate').value,
+    startTime: document.getElementById('eStartTime').value,
+    endTime: document.getElementById('eEndTime').value,
+    totalHours: getHours(),
+    city: document.getElementById('eCity').value,
+    servers: state.eServers,
+    bartenders: state.eBartenders,
+    coordinators: state.eCoord,
+    
+    guests: document.getElementById('eGuests').value,
+    notes: document.getElementById('eNotes').value,
+    source: document.getElementById('eSource').value,
+    estimate: document.getElementById('eTotal').textContent
+  };
+  sendToFormspree(data);
+}
+
+function submitHome() {
+  const first = document.getElementById('hFirstName').value;
+  const last = document.getElementById('hLastName').value;
+  const email = document.getElementById('hEmail').value;
+  const phone = document.getElementById('hPhone').value;
+  if (!first || !email || !phone) {
+    alert('Please fill in your name, email and phone.'); return;
+  }
+  const data = {
+    service: 'Home Organizing',
+    name: first + ' ' + last,
+    email, phone,
+    homeSize: state.hSize,
+    clutter: state.hClutter,
+    people: state.hPeople,
+    areas: state.hAreas.join(', '),
+    timeline: state.hTimeline,
+    date: document.getElementById('hDate').value,
+    city: document.getElementById('hCity').value,
+    notes: document.getElementById('hNotes').value,
+    source: document.getElementById('hSource').value,
+    estimate: document.getElementById('hTotal').textContent
+  };
+  sendToFormspree(data);
+}
+
+function sendToFormspree(data) {
+  // REPLACE f/YOUR_FORM_ID with your Formspree endpoint
+  const endpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  .then(r => {
+    if (r.ok) showSuccess();
+    else showSuccess(); // show anyway for now
+  })
+  .catch(() => showSuccess()); // show anyway for now
+}
+
+function showSuccess() {
+  document.getElementById('eventForm').classList.remove('visible');
+  document.getElementById('homeForm').classList.remove('visible');
+  document.getElementById('servicePicker').style.display = 'none';
+  document.getElementById('successScreen').classList.add('visible');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Set min date to today
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('eDate').min = today;
+  document.getElementById('hDate').min = today;
+});
+</script>
+</body>
+</html>
