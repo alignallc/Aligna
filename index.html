@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aligna — Premium Event Staffing</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 <style>
   :root {
     --bg: #f7f9fc;
@@ -90,37 +92,22 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 60px 80px;
-    position: relative;
-    overflow: hidden;
+    padding: 100px 60px 60px;
     background: var(--white);
+    overflow: hidden;
   }
 
-  .hero-bg {
-    position: absolute;
-    top: 0; right: 0;
-    width: 55%;
-    height: 100%;
-    background: linear-gradient(135deg, #f0f7ff 0%, #e4f0fc 50%, #d6e8f9 100%);
-    clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
-    z-index: 0;
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .hero-dots {
-    position: absolute;
-    top: 80px; right: 80px;
-    width: 200px; height: 200px;
-    background-image: radial-gradient(circle, var(--blue-mid) 1.5px, transparent 1.5px);
-    background-size: 20px 20px;
-    opacity: 0.5;
-    z-index: 1;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-  }
+  .hero-left { max-width: 560px; }
 
   .hero-tag {
     display: inline-flex;
@@ -131,7 +118,7 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--blue);
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     opacity: 0;
     animation: up 0.7s ease 0.1s forwards;
   }
@@ -143,27 +130,26 @@
   }
 
   .hero h1 {
-    font-size: clamp(40px, 5vw, 62px);
+    font-size: clamp(36px, 4.5vw, 58px);
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -2px;
     color: var(--navy);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     opacity: 0;
     animation: up 0.7s ease 0.2s forwards;
   }
 
   .hero h1 em {
-    font-style: normal;
+    font-style: italic;
     color: var(--blue);
   }
 
-  .hero p {
+  .hero-left > p {
     font-size: 16px;
     color: var(--text-mid);
     line-height: 1.75;
-    max-width: 440px;
-    margin-bottom: 44px;
+    margin-bottom: 36px;
     font-weight: 400;
     opacity: 0;
     animation: up 0.7s ease 0.3s forwards;
@@ -173,8 +159,26 @@
     display: flex;
     gap: 14px;
     align-items: center;
+    margin-bottom: 32px;
     opacity: 0;
     animation: up 0.7s ease 0.4s forwards;
+  }
+
+  .hero-trust {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: up 0.7s ease 0.5s forwards;
+  }
+
+  .hero-trust span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
   .btn {
@@ -214,74 +218,108 @@
     color: var(--navy);
   }
 
-  .hero-visual {
-    position: absolute;
-    right: 80px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
+  /* HERO RIGHT — IMAGE */
+  .hero-right {
+    position: relative;
     opacity: 0;
-    animation: up 0.8s ease 0.5s forwards;
+    animation: up 0.9s ease 0.4s forwards;
   }
 
-  .hero-card {
+  .hero-img-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 520px;
+    box-shadow: 0 24px 64px rgba(26,45,74,0.15);
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,45,74,0.4) 0%, transparent 50%);
+  }
+
+  .hero-stat-1 {
+    position: absolute;
+    top: 28px;
+    right: -20px;
     background: white;
-    border-radius: 16px;
-    padding: 28px;
-    box-shadow: 0 8px 48px rgba(74,144,217,0.12);
+    border-radius: 14px;
+    padding: 18px 22px;
+    box-shadow: 0 8px 32px rgba(26,45,74,0.12);
     border: 1px solid var(--border);
-    width: 280px;
-    margin-bottom: 16px;
+    min-width: 150px;
   }
 
-  .hero-card-label {
-    font-size: 11px;
+  .hero-stat-1 .s-label {
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text-light);
-    margin-bottom: 12px;
+    margin-bottom: 4px;
   }
 
-  .hero-card-value {
-    font-size: 36px;
+  .hero-stat-1 .s-value {
+    font-size: 30px;
     font-weight: 700;
     color: var(--navy);
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
     line-height: 1;
-    margin-bottom: 6px;
   }
 
-  .hero-card-value span { color: var(--blue); }
+  .hero-stat-1 .s-value span { color: var(--blue); }
 
-  .hero-card-sub {
-    font-size: 13px;
-    color: var(--text-light);
-  }
-
-  .hero-card-small {
-    background: var(--blue);
-    border-radius: 12px;
-    padding: 20px 24px;
-    color: white;
-    width: 220px;
-    margin-left: auto;
-  }
-
-  .hero-card-small .label {
+  .hero-stat-1 .s-sub {
     font-size: 11px;
+    color: var(--text-light);
+    margin-top: 3px;
+  }
+
+  .hero-stat-2 {
+    position: absolute;
+    bottom: 28px;
+    left: -20px;
+    background: var(--blue);
+    border-radius: 14px;
+    padding: 18px 22px;
+    color: white;
+    min-width: 140px;
+    box-shadow: 0 8px 32px rgba(74,144,217,0.3);
+  }
+
+  .hero-stat-2 .s-label {
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     opacity: 0.7;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
-  .hero-card-small .value {
-    font-size: 28px;
+  .hero-stat-2 .s-value {
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: -1px;
+    line-height: 1;
   }
+
+  .hero-stat-2 .s-sub {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 3px;
+  }
+
+  /* keep old .hero-bg and .hero-dots harmless */
+  .hero-bg, .hero-dots { display: none; }
+  .hero-content, .hero-visual { display: none; }
 
   /* STRIP */
   .strip {
@@ -659,9 +697,10 @@
   @media (max-width: 768px) {
     nav { padding: 0 24px; }
     .nav-links { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    .hero-visual { display: none; }
-    .hero-bg { width: 100%; clip-path: none; opacity: 0.4; }
+    .hero { padding: 90px 24px 60px; }
+    .hero-container { grid-template-columns: 1fr; gap: 40px; }
+    .hero-right { display: none; }
+    .hero-trust { gap: 12px; }
     .strip { padding: 20px 24px; gap: 24px; }
     .strip-items { display: none; }
     .services, .process { padding: 60px 24px; }
@@ -684,35 +723,48 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="#process">How It Works</a></li>
-    <li><a href="#contact" class="nav-btn">Book Staff</a></li>
+    <li><a href="quote.html" class="nav-btn">Get a Quote</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-dots"></div>
+  <div class="hero-container">
 
-  <div class="hero-content">
-    <div class="hero-tag">Bay Area Event Staffing</div>
-    <h1>Professional staff<br>for <em>every</em> occasion</h1>
-    <p>Aligna connects Bay Area businesses with pre-vetted servers, bartenders, and coordinators — ready to represent your brand with precision.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-dark">Book Staff →</a>
-      <a href="#services" class="btn btn-ghost">Our Services</a>
+    <!-- LEFT -->
+    <div class="hero-left">
+      <div class="hero-tag">Bay Area Event Staffing</div>
+      <h1>Professional staff<br>for <em>every</em> occasion</h1>
+      <p>Aligna connects Bay Area businesses with pre-vetted servers, bartenders, and coordinators — ready to represent your brand with precision.</p>
+      <div class="hero-actions">
+        <a href="quote.html" class="btn btn-dark">Get a Quote →</a>
+        <a href="#services" class="btn btn-ghost">Our Services</a>
+      </div>
+      <div class="hero-trust">
+        <span>✔ Vetted &amp; Insured</span>
+        <span>⚡ 48h Guarantee</span>
+        <span>★ 500+ Events</span>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-visual">
-    <div class="hero-card">
-      <div class="hero-card-label">Events Staffed</div>
-      <div class="hero-card-value">500<span>+</span></div>
-      <div class="hero-card-sub">Across the Bay Area</div>
+    <!-- RIGHT -->
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <img src="https://images.pexels.com/photos/16125867/pexels-photo-16125867.jpeg?auto=compress&cs=tinysrgb&w=1200&fit=max" alt="Professional event staff serving guests">
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="hero-stat-1">
+        <div class="s-label">Events Staffed</div>
+        <div class="s-value">500<span>+</span></div>
+        <div class="s-sub">Across the Bay Area</div>
+      </div>
+      <div class="hero-stat-2">
+        <div class="s-label">Satisfaction Rate</div>
+        <div class="s-value">98%</div>
+        <div class="s-sub">Client happiness</div>
+      </div>
     </div>
-    <div class="hero-card-small">
-      <div class="label">Satisfaction Rate</div>
-      <div class="value">98%</div>
-    </div>
+
   </div>
 </section>
 
@@ -865,7 +917,12 @@
   <div class="cta-inner">
     <h2>Ready to staff<br>your next event?</h2>
     <p>Join Bay Area businesses who trust Aligna for their most important moments. Quote within 24 hours.</p>
-    <a href="mailto:alignahq@gmail.com?subject=Book Staff — Aligna&body=Hi Cristina, I would like to book staff for my event." class="btn-white">Get a Free Quote →</a>
+    <a href="quote.html" class="btn-white">Get a Free Quote →</a>
+    <div style="margin-top:16px;">
+      <a href="https://calendly.com/alignahq" target="_blank" style="color:rgba(255,255,255,0.7);font-size:13px;font-weight:500;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.3);padding-bottom:2px;">
+        Prefer to talk? Book a WhatsApp call →
+      </a>
+    </div>
   </div>
 </section>
 
