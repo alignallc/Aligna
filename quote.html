@@ -1139,48 +1139,74 @@ function submitHome() {
   const data = {
     service: 'Home Organizing',
     name: first + ' ' + last,
-    email, phone,
-    homeSize: state.hSize,
-    clutter: state.hClutter,
-    people: state.hPeople,
-    areas: state.hAreas.join(', '),
-    timeline: state.hTimeline,
-    date: document.getElementById('hDate').value,
-    city: document.getElementById('hCity').value,
-    notes: document.getElementById('hNotes').value,
-    source: document.getElementById('hSource').value,
-    estimate: document.getElementById('hTotal').textContent
+    email: email,
+    phone: phone,
+    homeSize: state.hSize || 'Not specified',
+    clutter: state.hClutter || 'Not specified',
+    people: state.hPeople || 'Not specified',
+    areas: (state.hAreas && state.hAreas.length) ? state.hAreas.join(', ') : 'Not specified',
+    timeline: state.hTimeline || 'Flexible',
+    date: document.getElementById('hDate').value || 'TBD',
+    city: document.getElementById('hCity').value || 'Not specified',
+    notes: document.getElementById('hNotes').value || '',
+    source: document.getElementById('hSource').value || '',
+    estimate: document.getElementById('hTotal').textContent || 'TBD'
   };
   sendToFormspree(data);
 }
 
 function sendToFormspree(data) {
-  const endpoint = 'https://formspree.io/f/xlgaaaky';
-  // Add formspree required fields
-  data._subject = 'New Aligna Lead — ' + data.service;
-  data._replyto = data.email;
-  fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(r => r.json())
-  .then(result => {
-    if (result.ok || result.next) {
-      showSuccess();
-    } else {
-      // Still show success but log error
-      console.error('Formspree error:', result);
-      showSuccess();
-    }
-  })
-  .catch(err => {
-    console.error('Submit error:', err);
-    showSuccess();
+  // Create a hidden form and submit it directly — most reliable method
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://formspree.io/f/xlgaaaky';
+
+  // Add all data as hidden fields
+  Object.keys(data).forEach(key => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = data[key] || '';
+    form.appendChild(input);
   });
+
+  // Add Formspree special fields
+  const subject = document.createElement('input');
+  subject.type = 'hidden';
+  subject.name = '_subject';
+  subject.value = 'New Aligna Lead — ' + data.service;
+  form.appendChild(subject);
+
+  const replyto = document.createElement('input');
+  replyto.type = 'hidden';
+  replyto.name = '_replyto';
+  replyto.value = data.email;
+  form.appendChild(replyto);
+
+  // Prevent redirect — use hidden iframe
+  const iframe = document.createElement('iframe');
+  iframe.name = 'hidden_iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  form.target = 'hidden_iframe';
+  document.body.appendChild(form);
+
+  iframe.onload = function() {
+    showSuccess();
+    // Cleanup
+    setTimeout(() => {
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+    }, 1000);
+  };
+
+  form.submit();
+
+  // Fallback — show success after 2s regardless
+  setTimeout(() => {
+    showSuccess();
+  }, 2000);
 }
 
 function showSuccess() {
