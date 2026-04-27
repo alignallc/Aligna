@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Você Viralizou. E Agora? — Aligna O.S.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9913A;
+    --gold-light: #E8B96A;
+    --gold-pale: #F5DFA8;
+    --sand: #F2E8D5;
+    --sand-dark: #E6D4B0;
+    --terra: #8B5E3C;
+    --terra-dark: #5C3A1E;
+    --ocean: #2C4A6E;
+    --ocean-light: #4A7FA5;
+    --ink: #1A1208;
+    --cream: #FDF8F0;
+    --white: #FFFFFF;
+    --smoke: #F9F5EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--terra-dark);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .cover-texture {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(201,145,58,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(44,74,110,0.2) 0%, transparent 50%),
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.01) 40px,
+        rgba(255,255,255,0.01) 41px
+      );
+  }
+
+  .cover-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .cover-number {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(245,223,168,0.4);
+    text-transform: uppercase;
+  }
+
+  .cover-badge {
+    position: absolute;
+    top: 48px;
+    left: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .cover-content {
+    position: relative;
+    z-index: 2;
+    padding: 80px 64px 96px;
+    max-width: 900px;
+  }
+
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0.9;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--sand);
+    margin-bottom: 8px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .cover-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(245,223,168,0.7);
+    margin-top: 28px;
+    margin-bottom: 48px;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .cover-line {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .cover-context {
+    font-size: 14px;
+    color: rgba(242,232,213,0.5);
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  .cover-scroll {
+    position: absolute;
+    bottom: 40px;
+    right: 64px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(245,223,168,0.3);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 100px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    padding: 100px 0;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .heading-xl {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--terra-dark);
+  }
+
+  .heading-xl em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .heading-lg {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--terra-dark);
+  }
+
+  .heading-md {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--terra-dark);
+  }
+
+  .body-text {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #3A2810;
+    max-width: 640px;
+  }
+
+  .body-text + .body-text { margin-top: 20px; }
+
+  /* ── ALERT BLOCK ── */
+  .alert-block {
+    background: var(--terra-dark);
+    padding: 56px 64px;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .alert-block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--gold);
+  }
+
+  .alert-block-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--sand);
+    line-height: 1.4;
+    max-width: 700px;
+  }
+
+  .alert-block-sub {
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(242,232,213,0.55);
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    max-width: 580px;
+  }
+
+  /* ── INCIDENTE BLOCK ── */
+  .incident-block {
+    background: var(--sand);
+    border-left: 4px solid var(--ocean);
+    padding: 48px 56px;
+    margin: 48px 0;
+  }
+
+  .incident-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 20px;
+  }
+
+  .incident-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 900;
+    color: var(--ocean);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .incident-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2C3E50;
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+
+  .incident-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--terra-dark);
+    border-top: 1px solid rgba(44,74,110,0.2);
+    padding-top: 24px;
+    line-height: 1.5;
+  }
+
+  /* ── POSITIONING HERO ── */
+  .positioning-hero {
+    background: var(--gold);
+    padding: 80px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .positioning-hero::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 320px;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .positioning-phrase {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--terra-dark);
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .positioning-sub {
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(92,58,30,0.6);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+    background: var(--sand-dark);
+  }
+
+  .pillar {
+    background: var(--cream);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar:hover {
+    background: var(--smoke);
+  }
+
+  .pillar-percent {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 0.85;
+    color: var(--sand-dark);
+    margin-bottom: 24px;
+    letter-spacing: -4px;
+  }
+
+  .pillar-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .pillar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--terra-dark);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .pillar-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #5C3A1E;
+    opacity: 0.85;
+  }
+
+  .pillar-accent {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .pillar:nth-child(1) .pillar-accent { background: var(--gold); }
+  .pillar:nth-child(2) .pillar-accent { background: var(--ocean); }
+  .pillar:nth-child(3) .pillar-accent { background: var(--terra); }
+
+  /* ── POST RECIPE BLOCK ── */
+  .post-recipe {
+    background: var(--ink);
+    padding: 64px;
+    margin: 48px 0;
+    position: relative;
+  }
+
+  .recipe-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 32px;
+  }
+
+  .recipe-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--sand);
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .recipe-steps {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .recipe-step {
+    border: 1px solid rgba(201,145,58,0.2);
+    padding: 28px;
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--sand);
+    margin-bottom: 10px;
+  }
+
+  .step-text {
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(242,232,213,0.6);
+  }
+
+  /* ── CALENDAR ── */
+  .calendar-section {
+    background: var(--smoke);
+  }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+    background: var(--sand-dark);
+  }
+
+  .week-day {
+    background: var(--cream);
+    padding: 24px 16px;
+  }
+
+  .day-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .day-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--terra-dark);
+    margin-bottom: 8px;
+  }
+
+  .day-format {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 8px;
+  }
+
+  .day-theme {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #5C3A1E;
+  }
+
+  /* ── 30-DAY CALENDAR ── */
+  .calendar-30 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+    background: var(--sand-dark);
+  }
+
+  .cal-day {
+    background: var(--cream);
+    padding: 20px 16px;
+    min-height: 120px;
+    position: relative;
+  }
+
+  .cal-day:hover { background: var(--smoke); }
+
+  .cal-day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--sand-dark);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .cal-day-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--terra-dark);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .cal-day-format {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .cal-day-pillar {
+    position: absolute;
+    top: 0; right: 0;
+    width: 4px; height: 100%;
+  }
+  .pillar-1 { background: var(--gold); }
+  .pillar-2 { background: var(--ocean); }
+  .pillar-3 { background: var(--terra); }
+
+  /* ── VISUAL RULES ── */
+  .rules-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 40px;
+    background: var(--sand-dark);
+  }
+
+  .rules-yes {
+    background: var(--cream);
+    padding: 48px 40px;
+  }
+
+  .rules-no {
+    background: var(--terra-dark);
+    padding: 48px 40px;
+  }
+
+  .rules-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 32px;
+  }
+
+  .rules-yes .rules-header { color: var(--gold); }
+  .rules-no .rules-header { color: rgba(242,232,213,0.3); }
+
+  .rule-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .rule-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .rules-yes .rule-icon { color: var(--gold); }
+  .rules-no .rule-icon { color: rgba(242,232,213,0.3); }
+
+  .rule-text {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .rules-yes .rule-text { color: var(--terra-dark); }
+  .rules-no .rule-text { color: rgba(242,232,213,0.55); }
+
+  /* ── PALETTE ── */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 40px;
+    background: var(--sand-dark);
+    height: 200px;
+  }
+
+  .palette-swatch {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .swatch-1 { background: #8B5E3C; }
+  .swatch-2 { background: #C9913A; }
+  .swatch-3 { background: #F2E8D5; }
+  .swatch-4 { background: #2C4A6E; }
+
+  .swatch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .swatch-1 .swatch-label,
+  .swatch-2 .swatch-label,
+  .swatch-4 .swatch-label { color: rgba(255,255,255,0.7); }
+  .swatch-3 .swatch-label { color: rgba(92,58,30,0.6); }
+
+  .swatch-pct {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .swatch-1 .swatch-pct,
+  .swatch-2 .swatch-pct,
+  .swatch-4 .swatch-pct { color: rgba(255,255,255,0.9); }
+  .swatch-3 .swatch-pct { color: rgba(92,58,30,0.7); }
+
+  /* ── MONETIZATION TIMELINE ── */
+  .timeline {
+    position: relative;
+    margin-top: 48px;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--ocean));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--sand-dark);
+  }
+
+  .timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -47px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--cream);
+  }
+
+  .timeline-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--terra-dark);
+    margin-bottom: 12px;
+  }
+
+  .timeline-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #5C3A1E;
+    max-width: 560px;
+  }
+
+  .price-tag {
+    display: inline-block;
+    background: var(--sand);
+    border: 1px solid var(--gold);
+    padding: 4px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--terra-dark);
+    margin: 4px 4px 4px 0;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── SCRIPTS ── */
+  .script-card {
+    border: 1px solid var(--sand-dark);
+    margin-bottom: 2px;
+  }
+
+  .script-header {
+    padding: 24px 32px;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+  }
+
+  .script-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+
+  .script-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--terra-dark);
+  }
+
+  .script-body {
+    padding: 32px 32px 32px 88px;
+    background: var(--cream);
+  }
+
+  .script-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #3A2810;
+    background: var(--sand);
+    padding: 24px;
+    border-left: 3px solid var(--gold);
+    font-style: italic;
+    white-space: pre-line;
+  }
+
+  .script-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #8B5E3C;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── UPLOAD SYSTEM ── */
+  .system-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--sand-dark);
+  }
+
+  .system-row:last-child { border-bottom: none; }
+
+  .system-icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--sand-dark);
+    line-height: 1;
+  }
+
+  .system-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--terra-dark);
+    margin-bottom: 8px;
+  }
+
+  .system-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #5C3A1E;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--ocean);
+    color: var(--sand);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-right: 6px;
+    margin-top: 8px;
+  }
+
+  /* ── CLOSING QUOTE ── */
+  .closing {
+    background: var(--terra-dark);
+    padding: 120px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: 'V';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 400px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3.5vw, 42px);
+    font-weight: 700;
+    font-style: italic;
+    color: var(--sand);
+    line-height: 1.4;
+    max-width: 760px;
+    margin: 0 auto 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .closing-attr {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    padding: 40px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,232,213,0.3);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--sand-dark);
+    margin: 0 64px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .cover-content { padding: 60px 32px 80px; }
+    .section { padding: 64px 32px; }
+    .section-inner { padding: 0 32px; }
+    .alert-block { padding: 40px 32px; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .rules-split { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(4, 1fr); }
+    .calendar-30 { grid-template-columns: repeat(3, 1fr); }
+    .palette-grid { grid-template-columns: repeat(2, 1fr); height: auto; }
+    .palette-swatch { height: 120px; }
+    .recipe-steps { grid-template-columns: 1fr; }
+    .cover-number, .cover-badge { top: 24px; }
+    .cover-number { right: 24px; }
+    .cover-badge { left: 24px; }
+    .footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-meta { text-align: center; }
+    .post-recipe { padding: 40px 32px; }
+    .incident-block { padding: 32px; }
+    .positioning-hero { padding: 64px 32px; }
+    .closing { padding: 80px 32px; }
+    .divider { margin: 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ COVER ══ -->
+<section class="cover">
+  <div class="cover-texture"></div>
+  <div class="cover-grain"></div>
+  <div class="cover-badge">Aligna O.S. — Perfil 1</div>
+  <div class="cover-number">Doc 01 / 02 — Abril 2026</div>
+  <div class="cover-content">
+    <div class="cover-eyebrow">Guia de Posicionamento · Momento Viral</div>
+    <h1 class="cover-title">Você ficou<br>famosa.<br><em>E agora?</em></h1>
+    <div class="cover-line"></div>
+    <p class="cover-subtitle">Um guia prático para transformar visibilidade em presença real — sem agência, sem dinheiro, sem complicação.</p>
+    <p class="cover-context">Preparado especialmente para você, Vitória.<br>Tudo aqui foi construído com base no seu momento e na sua história.<br>Não é um template genérico.</p>
+  </div>
+  <div class="cover-scroll">Scroll para começar</div>
+</section>
+
+<!-- ══ SECTION 1 — O INCIDENTE ══ -->
+<section class="section">
+  <div class="section-label">Seção 01</div>
+  <h2 class="heading-xl">O que <em>aconteceu</em><br>e o que isso significa</h2>
+  <br><br>
+  <div class="incident-block">
+    <div class="incident-label">O Incidente · Ipanema · Abril 2026</div>
+    <div class="incident-headline">Artesã agredida pela guarda municipal<br>na Praia de Ipanema</div>
+    <p class="incident-text">Em abril de 2026, agentes da SEOP abordaram de forma truculenta uma artesã que vendia suas peças na areia de Ipanema. O vídeo viralizou. O prefeito afastou os envolvidos, pediu desculpas publicamente, e o Brasil passou a conhecer o nome de Vitória.</p>
+    <p class="incident-text">Essa foi a forma como o mundo te encontrou. Uma cena injusta que tocou milhões de pessoas — porque você estava simplesmente trabalhando. Defendendo seu espaço. Sendo quem você é.</p>
+    <div class="incident-quote">"O mundo me conheceu de uma forma.<br>Agora me conheça de verdade."</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;background:var(--sand-dark)">
+    <div style="background:var(--cream);padding:40px 36px;">
+      <div class="section-label" style="margin-bottom:16px">O que a maioria faz</div>
+      <p class="body-text" style="font-size:15px">Fica esperando o próximo post perfeito. Fica paralisada com o peso da atenção. Perde a janela.</p>
+    </div>
+    <div style="background:var(--terra-dark);padding:40px 36px;">
+      <div class="section-label" style="margin-bottom:16px;color:var(--gold-light)">O que você vai fazer</div>
+      <p style="font-size:15px;line-height:1.85;color:var(--sand);max-width:640px">Construir, enquanto as pessoas ainda estão olhando. Não precisa ser perfeito. Precisa ser <strong style="color:var(--gold-light)">consistente.</strong></p>
+    </div>
+  </div>
+</section>
+
+<div class="alert-block">
+  <p class="alert-block-text">Janelas fecham.<br>Essa dura entre 2 e 4 semanas.</p>
+  <p class="alert-block-sub">Cada dia sem posicionamento é engajamento que vai embora. Não é sobre aproveitar o viral — é sobre construir algo que dure depois dele.</p>
+</div>
+
+<!-- ══ POSITIONING ══ -->
+<div class="positioning-hero">
+  <p class="positioning-phrase">"O incidente é o capítulo 1.<br>Não é o livro inteiro."</p>
+  <p class="positioning-sub">Sua frase de posicionamento · Aligna O.S. 2026</p>
+</div>
+
+<!-- ══ SECTION 2 — POST DO INCIDENTE ══ -->
+<section class="section">
+  <div class="section-label">Seção 02</div>
+  <h2 class="heading-xl">O post que<br><em>você precisa fazer</em></h2>
+  <br>
+  <p class="body-text">Antes de qualquer calendário, antes de qualquer estratégia — existe um post que define tudo. É o post onde você conta o incidente com a sua voz. Não como vítima. Como mulher que estava trabalhando e não vai se calar.</p>
+
+  <div class="post-recipe">
+    <div class="recipe-label">Receita · Post do Incidente + Posicionamento</div>
+    <div class="recipe-title">Como escrever o post mais importante<br>da sua vida digital</div>
+    <div class="recipe-steps">
+      <div class="recipe-step">
+        <div class="step-num">Passo 01</div>
+        <div class="step-title">Abrir com verdade, não com drama</div>
+        <p class="step-text">Comece contando o que aconteceu com suas palavras. Sem exagero. O fato já é forte. "No dia X, eu estava trabalhando na praia como sempre faço. E aí aconteceu isso."</p>
+      </div>
+      <div class="recipe-step">
+        <div class="step-num">Passo 02</div>
+        <div class="step-title">Como você se sentiu — autenticidade é tudo</div>
+        <p class="step-text">Uma frase honesta sobre o que você sentiu naquele momento. Medo, raiva, surpresa. Não precisa ser elaborado. O público quer te conhecer, não ler um comunicado.</p>
+      </div>
+      <div class="recipe-step">
+        <div class="step-num">Passo 03</div>
+        <div class="step-title">Sua luta — mulher, trabalhadora, carioca</div>
+        <p class="step-text">Conecte o incidente com quem você é. Você não é a primeira artesã a passar por isso. Mas você tem voz agora. Fale pelo seu trabalho, pela sua dignidade, pelo seu espaço.</p>
+      </div>
+      <div class="recipe-step">
+        <div class="step-num">Passo 04</div>
+        <div class="step-title">Fechar com quem você é de verdade</div>
+        <p class="step-text">Termine mostrando o próximo capítulo. "Isso foi o que aconteceu. Agora me conheça de verdade." Convide as pessoas a ficarem — não pelo viral, mas pela mulher que você é.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--sand);padding:40px;margin-top:2px;border-left:4px solid var(--gold)">
+    <div class="section-label" style="margin-bottom:16px">Formato recomendado · Reel ou Carrossel</div>
+    <p class="body-text" style="font-size:14px">Se for Reel: grave falando olhando para a câmera. Natural. No seu espaço, com a luz da tarde. Se for carrossel: 5 a 7 slides — cada passo acima é um slide. Última imagem: sua foto mais bonita, com a frase de posicionamento.</p>
+    <div style="margin-top:16px">
+      <span class="tag">Reel 60s</span>
+      <span class="tag">Carrossel 5-7 slides</span>
+      <span class="tag">Postar terça ou quarta 18h</span>
+      <span class="tag">Legenda longa</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3 — PILARES ══ -->
+<section class="section-full" style="background:var(--smoke)">
+  <div class="section-inner">
+    <div class="section-label">Seção 03</div>
+    <h2 class="heading-xl">Seus 3 pilares<br><em>de conteúdo</em></h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">O que postar, sobre o quê, com que frequência. Cada pilar tem um propósito. Juntos, eles constroem a Vitória que o mundo ainda não conhece.</p>
+  </div>
+  <div class="pillars-grid" style="margin:0;border-radius:0">
+    <div class="pillar">
+      <div class="pillar-percent">50%</div>
+      <div class="pillar-number">Pilar 01</div>
+      <div class="pillar-title">Quem você é</div>
+      <p class="pillar-desc">Vida real, personalidade, Ipanema como casa, humor, cotidiano. O dia a dia da artesã carioca — vendendo, andando, vivendo. Esse é o pilar que cria fãs, não só seguidores.</p>
+      <p class="pillar-desc" style="margin-top:12px;font-weight:600;font-size:13px">Exemplos: manhã na praia antes das vendas. Mostrando as peças que fez. Uma reação engraçada. Uma vista linda de Ipanema.</p>
+      <div class="pillar-accent"></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-percent">30%</div>
+      <div class="pillar-number">Pilar 02</div>
+      <div class="pillar-title">A Luta</div>
+      <p class="pillar-desc">Resistência, não vitimismo. Ser mulher, ser trabalhadora, sua verdade. Esse pilar mostra que você tem opinião, tem história, tem força. É aqui que você conquista respeito.</p>
+      <p class="pillar-desc" style="margin-top:12px;font-weight:600;font-size:13px">Exemplos: o post do incidente. Uma reflexão sobre ser artesã de rua. Sobre a luta para ocupar espaço público.</p>
+      <div class="pillar-accent"></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-percent">20%</div>
+      <div class="pillar-number">Pilar 03</div>
+      <div class="pillar-title">A Beleza</div>
+      <p class="pillar-desc">Seus olhos, Ipanema, momentos bonitos na vida simples. Esse pilar é o gancho visual — as fotos que param o scroll, que as marcas querem, que as pessoas salvam.</p>
+      <p class="pillar-desc" style="margin-top:12px;font-weight:600;font-size:13px">Exemplos: olhar direto para a câmera na praia. Pôr do sol de Ipanema. Close nas peças de artesanato com luz natural.</p>
+      <div class="pillar-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4 — CALENDÁRIO SEMANAL ══ -->
+<section class="section">
+  <div class="section-label">Seção 04</div>
+  <h2 class="heading-xl">Agenda semanal<br><em>de postagens</em></h2>
+  <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">Horários definidos com base nos dados de engajamento do Brasil em 2026. Siga por 30 dias antes de mudar qualquer coisa.</p>
+  <div class="week-grid">
+    <div class="week-day">
+      <div class="day-name">Seg</div>
+      <div class="day-time">9h ou 18h</div>
+      <div class="day-format">Story / Reel curto</div>
+      <div class="day-theme">Energia, motivação. Como começa a semana de uma artesã carioca.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Ter</div>
+      <div class="day-time">11h</div>
+      <div class="day-format">Carrossel</div>
+      <div class="day-theme">Conteúdo de valor. Posts que ensinam algo geram mais salvamentos.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Qua</div>
+      <div class="day-time">18h</div>
+      <div class="day-format">Foto + legenda longa</div>
+      <div class="day-theme">História pessoal. O horário em que as pessoas têm tempo de ler.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Qui</div>
+      <div class="day-time">19h</div>
+      <div class="day-format">Reel 30–60s</div>
+      <div class="day-theme">Conteúdo de nicho. Artesanato, praia, Rio — o que te define visualmente.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Sex</div>
+      <div class="day-time">17h</div>
+      <div class="day-format">Story interativo</div>
+      <div class="day-theme">Leve e social. Enquetes, perguntas, caixinha — construir comunidade.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Sáb</div>
+      <div class="day-time">10h</div>
+      <div class="day-format">Foto aspiracional</div>
+      <div class="day-theme">Estético. A foto mais bonita da semana. Seus olhos, Ipanema, as peças.</div>
+    </div>
+    <div class="week-day">
+      <div class="day-name">Dom</div>
+      <div class="day-time">19h</div>
+      <div class="day-format">Legenda longa</div>
+      <div class="day-theme">Reflexão e conexão. As pessoas têm mais tempo para ler no domingo à noite.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5 — 30 DIAS ══ -->
+<section class="section-full" style="background:var(--smoke)">
+  <div class="section-inner">
+    <div class="section-label">Seção 05</div>
+    <h2 class="heading-xl">Calendário de <em>30 dias</em></h2>
+    <p style="margin-top:16px;font-size:14px;line-height:1.8;color:#5C3A1E;max-width:560px;margin-bottom:8px">
+      <span style="display:inline-block;width:12px;height:12px;background:var(--gold);margin-right:8px;vertical-align:middle"></span>Pilar 1 — Quem você é &nbsp;
+      <span style="display:inline-block;width:12px;height:12px;background:var(--ocean);margin-right:8px;vertical-align:middle"></span>Pilar 2 — A Luta &nbsp;
+      <span style="display:inline-block;width:12px;height:12px;background:var(--terra);margin-right:8px;vertical-align:middle"></span>Pilar 3 — A Beleza
+    </p>
+  </div>
+  <div class="calendar-30" style="margin:0">
+    <!-- Row 1 -->
+    <div class="cal-day"><div class="cal-day-num">1</div><div class="cal-day-title">Post do Incidente</div><div class="cal-day-format">Reel ou Carrossel</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">2</div><div class="cal-day-title">Quem sou eu além disso</div><div class="cal-day-format">Story / caixinha</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">3</div><div class="cal-day-title">Minhas peças na luz da manhã</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">4</div><div class="cal-day-title">Um dia na praia com você</div><div class="cal-day-format">Reel 30-60s</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">5</div><div class="cal-day-title">Por que Ipanema é minha casa</div><div class="cal-day-format">Foto + legenda</div><div class="cal-day-pillar pillar-1"></div></div>
+    <!-- Row 2 -->
+    <div class="cal-day"><div class="cal-day-num">6</div><div class="cal-day-title">O que aprendi com o viral</div><div class="cal-day-format">Legenda longa</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">7</div><div class="cal-day-title">Close nos olhos — sem filtro</div><div class="cal-day-format">Foto</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">8</div><div class="cal-day-title">Como faço minhas peças</div><div class="cal-day-format">Reel bastidor</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">9</div><div class="cal-day-title">Ser mulher e trabalhar na rua</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">10</div><div class="cal-day-title">Pôr do sol de Ipanema</div><div class="cal-day-format">Story / Foto</div><div class="cal-day-pillar pillar-3"></div></div>
+    <!-- Row 3 -->
+    <div class="cal-day"><div class="cal-day-num">11</div><div class="cal-day-title">O que me faz levantar todo dia</div><div class="cal-day-format">Reel curto</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">12</div><div class="cal-day-title">Agradecimento ao apoio recebido</div><div class="cal-day-format">Story interativo</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">13</div><div class="cal-day-title">Minha peça favorita (e por quê)</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">14</div><div class="cal-day-title">Como é a manhã antes das vendas</div><div class="cal-day-format">Reel bastidor</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">15</div><div class="cal-day-title">Reflexão dos 15 dias</div><div class="cal-day-format">Legenda longa</div><div class="cal-day-pillar pillar-2"></div></div>
+    <!-- Row 4 -->
+    <div class="cal-day"><div class="cal-day-num">16</div><div class="cal-day-title">Ipanema de manhã — série</div><div class="cal-day-format">Foto estética</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">17</div><div class="cal-day-title">Pergunta para os seguidores</div><div class="cal-day-format">Story + enquete</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">18</div><div class="cal-day-title">Uma coisa que nunca abro mão</div><div class="cal-day-format">Reel 60s</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">19</div><div class="cal-day-title">Tutorial: como uso cada peça</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">20</div><div class="cal-day-title">O que Ipanema me ensinou</div><div class="cal-day-format">Legenda longa</div><div class="cal-day-pillar pillar-1"></div></div>
+    <!-- Row 5 -->
+    <div class="cal-day"><div class="cal-day-num">21</div><div class="cal-day-title">Série: olhar direto na câmera</div><div class="cal-day-format">Foto close</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">22</div><div class="cal-day-title">Uma história de cliente</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">23</div><div class="cal-day-title">O que mudou depois do viral</div><div class="cal-day-format">Reel autêntico</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">24</div><div class="cal-day-title">Praia de manhã — rotina real</div><div class="cal-day-format">Reel bastidor</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">25</div><div class="cal-day-title">Cor favorita do pôr do sol</div><div class="cal-day-format">Foto estética</div><div class="cal-day-pillar pillar-3"></div></div>
+    <!-- Row 6 -->
+    <div class="cal-day"><div class="cal-day-num">26</div><div class="cal-day-title">Minha luta é minha força</div><div class="cal-day-format">Legenda longa</div><div class="cal-day-pillar pillar-2"></div></div>
+    <div class="cal-day"><div class="cal-day-num">27</div><div class="cal-day-title">Como começou o artesanato</div><div class="cal-day-format">Carrossel</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">28</div><div class="cal-day-title">Dia especial na praia</div><div class="cal-day-format">Reel + Story</div><div class="cal-day-pillar pillar-1"></div></div>
+    <div class="cal-day"><div class="cal-day-num">29</div><div class="cal-day-title">Série olhos — novo close</div><div class="cal-day-format">Foto close</div><div class="cal-day-pillar pillar-3"></div></div>
+    <div class="cal-day"><div class="cal-day-num">30</div><div class="cal-day-title">30 dias depois. O que aprendi.</div><div class="cal-day-format">Reel ou legenda</div><div class="cal-day-pillar pillar-2"></div></div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6 — REGRAS VISUAIS ══ -->
+<section class="section">
+  <div class="section-label">Seção 06</div>
+  <h2 class="heading-xl">Regras visuais<br><em>do feed</em></h2>
+  <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">O que faz o feed parecer uma marca. Você já tem o material — só precisa de consistência.</p>
+  <div class="rules-split" style="margin-top:40px">
+    <div class="rules-yes">
+      <div class="rules-header">SIM ✓</div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Luz natural sempre.</strong> Janela aberta, ao ar livre, manhã ou tarde. Luz de LED artificial estraga a paleta quente do feed.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Tons quentes e dourados.</strong> Terra, areia, pôr do sol, bronze. Essa é a paleta de Ipanema. É a sua paleta.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Formato vertical 4:5.</strong> Ocupa mais espaço no feed, para mais o scroll. Toda foto, vertical.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Um preset só, sempre.</strong> Os 5 ajustes fixos no Lightroom, aplicados em toda foto sem exceção. Consistência visual é o que separa perfil de marca.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Fundo coerente com os últimos 3 posts.</strong> Antes de postar, olha os 3 posts anteriores. O novo post combina com eles?</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text"><strong>Olhar direto na câmera.</strong> Seus olhos são o maior ativo visual do feed. Use nas fotos principais.</p></div>
+    </div>
+    <div class="rules-no">
+      <div class="rules-header">NÃO ✗</div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Misturar fotos frias (azuladas) com fotos quentes (amareladas) no mesmo feed.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Usar filtros diferentes em cada foto. Isso destrói a coerência visual em semanas.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Fotos muito escuras ou muito estouradas. Claridade: 10 a 15. Nunca zera o brilho.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Postar prints de outros perfis ou memes sem relação com sua paleta. Quebra o feed.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Selfies contra-luz ou em ambientes muito escuros como foto de feed. Stories, tudo bem.</p></div>
+      <div class="rule-item"><span class="rule-icon">→</span><p class="rule-text">Formatos diferentes sem critério. 70% das fotos devem ser verticais.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7 — PALETA ══ -->
+<section class="section-full" style="background:var(--smoke)">
+  <div class="section-inner">
+    <div class="section-label">Seção 07</div>
+    <h2 class="heading-xl">Paleta de cores<br><em>do feed</em></h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">Baseada no seu feed atual. Um upgrade, não uma reinvenção. Você já tem esses tons nas suas fotos — agora é só tornar consistente.</p>
+  </div>
+  <div class="palette-grid" style="margin:40px 0 0">
+    <div class="palette-swatch swatch-1">
+      <div class="swatch-label">Dominante</div>
+      <div class="swatch-pct">60%</div>
+    </div>
+    <div class="palette-swatch swatch-2">
+      <div class="swatch-label">Secundária</div>
+      <div class="swatch-pct">25%</div>
+    </div>
+    <div class="palette-swatch swatch-3">
+      <div class="swatch-label">Neutra</div>
+      <div class="swatch-pct">10%</div>
+    </div>
+    <div class="palette-swatch swatch-4">
+      <div class="swatch-label">Acento</div>
+      <div class="swatch-pct">5%</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px;background:var(--sand-dark)">
+    <div style="background:var(--cream);padding:24px 28px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px">Terra · #8B5E3C</div>
+      <p style="font-size:13px;color:#5C3A1E;line-height:1.6">Pele, areia, madeira. O fundo de tudo.</p>
+    </div>
+    <div style="background:var(--cream);padding:24px 28px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px">Ouro · #C9913A</div>
+      <p style="font-size:13px;color:#5C3A1E;line-height:1.6">Pôr do sol de Ipanema. Suas peças. A luz da tarde.</p>
+    </div>
+    <div style="background:var(--cream);padding:24px 28px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px">Areia · #F2E8D5</div>
+      <p style="font-size:13px;color:#5C3A1E;line-height:1.6">A praia, o céu de tarde, os fundos claros.</p>
+    </div>
+    <div style="background:var(--cream);padding:24px 28px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px">Oceano · #2C4A6E</div>
+      <p style="font-size:13px;color:#5C3A1E;line-height:1.6">O mar de Ipanema. Acento em momentos de força.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 8 — SISTEMA UPLOAD ══ -->
+<section class="section">
+  <div class="section-label">Seção 08</div>
+  <h2 class="heading-xl">Sistema de upload<br><em>semanal</em></h2>
+  <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">1 hora todo domingo. A semana inteira agendada. Você não pensa mais em "o que posto hoje?" — já está pronto.</p>
+
+  <div style="margin-top:48px">
+    <div class="system-row">
+      <div class="system-icon">01</div>
+      <div>
+        <div class="system-title">Selecionar (10 min)</div>
+        <p class="system-text">Escolha as fotos e vídeos da semana. Siga o tema do calendário. Não escolha mais do que precisa — menos é mais consistente.</p>
+      </div>
+    </div>
+    <div class="system-row">
+      <div class="system-icon">02</div>
+      <div>
+        <div class="system-title">Editar no Lightroom Mobile (15 min)</div>
+        <p class="system-text">Abra o Lightroom Mobile. Aplique o preset salvo em cada foto. Não mude nada — é isso que cria a identidade visual do feed. Os 5 ajustes são: Exposição +0.3 / Contraste +10 / Temperatura +15 / Saturação +10 / Clareza +5.</p>
+        <span class="tag">Lightroom Mobile</span><span class="tag">Gratuito</span>
+      </div>
+    </div>
+    <div class="system-row">
+      <div class="system-icon">03</div>
+      <div>
+        <div class="system-title">Visualizar o grid no Later (10 min)</div>
+        <p class="system-text">Abra o Later e arraste as fotos para ver como o grid vai ficar antes de publicar. Garante que as cores combinam e o feed parece uma marca.</p>
+        <span class="tag">Later</span><span class="tag">Gratuito</span>
+      </div>
+    </div>
+    <div class="system-row">
+      <div class="system-icon">04</div>
+      <div>
+        <div class="system-title">Agendar no Meta Business Suite (20 min)</div>
+        <p class="system-text">Faça o upload de cada post já com a legenda escrita e o horário definido. A semana inteira agendada. Você não precisa lembrar de postar — o sistema faz por você.</p>
+        <span class="tag">Meta Business Suite</span><span class="tag">Gratuito</span><span class="tag">Oficial Meta</span>
+      </div>
+    </div>
+    <div class="system-row">
+      <div class="system-icon">05</div>
+      <div>
+        <div class="system-title">Interagir todos os dias (5 min/dia)</div>
+        <p class="system-text">Responder comentários e DMs é parte do trabalho. O algoritmo premia contas que interagem. 5 minutos por dia fazem diferença real no alcance dos seus posts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 9 — SCRIPTS ══ -->
+<section class="section-full" style="background:var(--smoke)">
+  <div class="section-inner">
+    <div class="section-label">Seção 09</div>
+    <h2 class="heading-xl">Scripts prontos<br><em>para 3 situações</em></h2>
+    <p style="margin-top:16px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">Copie, adapte com seu jeito de falar, e use.</p>
+    <br><br>
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-num">1</div>
+        <div class="script-title">Abordando uma marca</div>
+      </div>
+      <div class="script-body">
+        <p class="script-text">Oi, [nome da marca]! Sou a Vitória, artesã em Ipanema — você talvez tenha me visto recentemente nas redes.
+
+Tenho [X] seguidores novos, um público majoritariamente feminino que acompanha meu dia a dia na praia, e estou construindo parcerias com marcas que fazem sentido com o meu estilo de vida.
+
+Meu media kit tem mais detalhes sobre engajamento e formatos de parceria. Você topa dar uma olhada?</p>
+        <p class="script-note">→ Envie via DM do Instagram ou e-mail. Sempre com o media kit em anexo ou link.</p>
+      </div>
+    </div>
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-num">2</div>
+        <div class="script-title">Respondendo a um jornalista</div>
+      </div>
+      <div class="script-body">
+        <p class="script-text">Obrigada pelo contato! Estou disponível para falar sobre o ocorrido e sobre o trabalho que faço em Ipanema há [X anos].
+
+Para entrevistas, minha preferência é por vídeo ou presencialmente — acredito que a história fica mais completa quando me veem trabalhando. Pode combinar um horário?</p>
+        <p class="script-note">→ Não responda perguntas de imprensa no improviso. Combine antes o que você quer dizer.</p>
+      </div>
+    </div>
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-num">3</div>
+        <div class="script-title">Negociando o valor de uma parceria</div>
+      </div>
+      <div class="script-body">
+        <p class="script-text">Obrigada pela proposta! Para esse formato, meu valor é R$[X], conforme a tabela do meu media kit.
+
+Caso o orçamento seja menor, podemos conversar sobre um formato menor — por exemplo, Story ao invés de Reel, ou um post mais simples.
+
+Mas não trabalho abaixo do mínimo da tabela, porque é o que garante qualidade para a sua marca também.</p>
+        <p class="script-note">→ Nunca aceite abaixo da tabela mínima no primeiro mês. Isso define o nível de parceria para o futuro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 10 — MONETIZAÇÃO ══ -->
+<section class="section">
+  <div class="section-label">Seção 10</div>
+  <h2 class="heading-xl">O caminho<br><em>para o dinheiro</em></h2>
+  <p style="margin-top:16px;margin-bottom:8px;font-size:15px;line-height:1.8;color:#5C3A1E;max-width:560px">Isso não acontece no primeiro mês. E tudo bem. A consistência é o que cria o ativo — o viral é só a porta de entrada.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Mês 01</div>
+      <div class="timeline-title">Construir a base</div>
+      <p class="timeline-text">Consistência. Crescimento orgânico. Responder todo comentário. Não existe atalho para essa fase — é o que cria o portfólio real para mostrar às marcas.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Mês 01–1.5</div>
+      <div class="timeline-title">Media kit com números reais</div>
+      <p class="timeline-text">Com 45 dias de dados nos Insights, o media kit fica completo e forte. Primeiras abordagens a marcas pequenas — cosméticos cariocas, moda praia, acessórios.</p>
+      <div style="margin-top:16px">
+        <span class="price-tag">Story: R$150–250</span>
+        <span class="price-tag">Feed: R$350–600</span>
+        <span class="price-tag">Reel: R$450–800</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Mês 02–03</div>
+      <div class="timeline-title">Primeiro case pago</div>
+      <p class="timeline-text">Fotógrafo parceiro para elevar a qualidade visual. Explorar outros formatos de receita — venda das peças pelo Instagram, workshop, aparições em mídia.</p>
+      <div style="margin-top:16px">
+        <span class="price-tag">Bundle: R$900–1.500</span>
+        <span class="price-tag">UGC: R$200–400</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Mês 03+</div>
+      <div class="timeline-title">Subir preços. Projetos maiores.</div>
+      <p class="timeline-text">A visibilidade que você construiu é o portfólio. A consistência que você manteve é a prova. A partir daqui, você tem dados reais para negociar valores maiores.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGRAS DO KIT ══ -->
+<div class="alert-block" style="background:var(--sand)">
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--sand-dark)">
+    <div style="background:var(--cream);padding:40px 36px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Regra 01</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terra-dark);margin-bottom:12px">Feito é melhor que perfeito.</div>
+      <p style="font-size:14px;line-height:1.75;color:#5C3A1E">O primeiro post não precisa ser o melhor post. Ele precisa existir.</p>
+    </div>
+    <div style="background:var(--cream);padding:40px 36px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Regra 02</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terra-dark);margin-bottom:12px">Consistência vence viralidade.</div>
+      <p style="font-size:14px;line-height:1.75;color:#5C3A1E">Um perfil que posta toda semana por 3 meses bate qualquer viral que some depois de 2 semanas.</p>
+    </div>
+    <div style="background:var(--cream);padding:40px 36px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Regra 03</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terra-dark);margin-bottom:12px">Comece com o que tem.</div>
+      <p style="font-size:14px;line-height:1.75;color:#5C3A1E">Celular, luz natural, sua história. Você não precisa de equipamento para começar — precisa começar.</p>
+    </div>
+    <div style="background:var(--cream);padding:40px 36px">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Regra 04</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--terra-dark);margin-bottom:12px">O kit é seu. Adapte.</div>
+      <p style="font-size:14px;line-height:1.75;color:#5C3A1E">Se um tema do calendário não faz sentido no dia, troca por outro. O que não pode mudar é a frequência.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CLOSING QUOTE ══ -->
+<div class="closing">
+  <p class="closing-quote">"Não me apego muito ao que as pessoas falam,<br>porque eu sei quem eu sou."</p>
+  <p class="closing-attr">— Vitória, em suas próprias palavras</p>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-brand">Aligna O.S.</div>
+  <div class="footer-meta">
+    Documento 01 de 02 — Guia de Posicionamento · Perfil 1 Viral<br>
+    Preparado para Vitória (@vitoriapelomundoo) · Abril 2026<br>
+    CLK Advisory · Case Study
+  </div>
+</footer>
+
+</body>
+</html>
